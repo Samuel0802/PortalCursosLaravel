@@ -11,35 +11,45 @@ class StatusUsersSeeder extends Seeder
 
     public function run(): void
     {
-        // Capturar possíveis exceções durante a execução do seeder.
-      try {
-          // Se não encontrar o registro com o nome e o id, cadastra o registro no BD
-        StatusUsers::firtsOrCreate(
-            ['name' => 'Ativo', 'id' => 1],
-            ['id' => 1, 'name' => 'Ativo'],
-        );
-      } catch (\Exception $e) {
-         // Lidar com a exceção
-      }
 
-       // Capturar possíveis exceções durante a execução do seeder.
-      try {
-        StatusUsers::firtsOrCreate(
-            ['name' => 'Inativo', 'id' => 2],
-            ['id' => 2, 'name' => 'Inativo'],
+
+        // Se não encontrar o registro com o nome e o id, cadastra o registro no BD
+        StatusUsers::firstOrCreate(
+            [
+                'name' => 'Ativo',
+                'created_at' => null,
+                'updated_at' => null
+            ],
+
         );
 
-        StatusUsers::firtsOrCreate(
-            ['name' => 'Aguardando Confirmação', 'id' => 3],
-            ['id' => 3, 'name' => 'Aguardando Confirmação'],
+
+
+        StatusUsers::firstOrCreate(
+            [
+                'name' => 'Inativo',
+                'created_at' => null,
+                'updated_at' => null
+            ],
+
         );
 
-        StatusUsers::firtsOrCreate(
-            ['name' => 'Spam', 'id' => 4],
-            ['id' => 4, 'name' => 'Spam'],
+        StatusUsers::firstOrCreate(
+            [
+                'name' => 'Aguardando Confirmação',
+                'created_at' => null,
+                'updated_at' => null
+            ],
+
         );
-      } catch (\Exception $e) {
-         // Lidar com a exceção
-      }
+
+        StatusUsers::firstOrCreate(
+            [
+                'name' => 'Spam',
+                'created_at' => null,
+                'updated_at' => null
+            ],
+
+        );
     }
 }

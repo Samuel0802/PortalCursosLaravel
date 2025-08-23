@@ -11,26 +11,36 @@ class CursosStatusSeeder extends Seeder
 
     public function run(): void
     {
-        // Capturar possíveis exceções durante a execução do seeder.
-        try {
+
               // Se não encontrar o registro com o nome, cadastra o registro no BD
-            CursosStatus::firtsOrCreate(
-                ['name' => 'Ativo', 'id' => 1],
-                ['id' => 1, 'name' => 'Ativo'],
+            CursosStatus::firstOrCreate(
+                [
+                    'name' => 'Ativo',
+                    'created_at' => null,
+                    'updated_at' => null,
+                ],
+
             );
 
-            CursosStatus::firtsOrCreate(
-                ['name' => 'Inativo', 'id' => 2],
-                ['id' => 2, 'name' => 'Inativo'],
+            CursosStatus::firstOrCreate(
+                [
+                    'name' => 'Inativo',
+                    'created_at' => null,
+                    'updated_at' => null,
+                ],
+
             );
 
-            CursosStatus::firtsOrCreate(
-                ['name' => 'Análise', 'id' => 3],
-                ['id' => 3, 'name' => 'Análise'],
+            CursosStatus::firstOrCreate(
+                [
+                    'name' => 'Análise',
+                    'created_at' => null,
+                    'updated_at' => null,
+
+                ],
+
             );
 
-        } catch (\Exception $e) {
-            //throw $th;
-        }
+
     }
 }
