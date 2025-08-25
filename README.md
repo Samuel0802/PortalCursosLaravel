@@ -1,4 +1,4 @@
-Projeto PortalAcessos
+Projeto PortalCursos
 
 ## Requisitos
 
@@ -29,6 +29,10 @@ php artisan key:generate
 Executar as migrations para criar as tabelas e as colunas.
 ```
 php artisan migrate
+
+ou
+
+php artisan migrate:fresh --seed
 ```
 
 Iniciar o projeto criado com Laravel.
@@ -46,29 +50,3 @@ Acessar a página criada com Laravel.
 http://127.0.0.1:8000
 ```
 
-## Sequência para criar o projeto
-
-Criar o projeto com Laravel
-```
-composer create-project laravel/laravel .
-```
-
-Iniciar o projeto criado com Laravel.
-```
-php artisan serve
-```
-
-Instalar as dependências do Node.js.
-```
-npm install
-```
-
-Executar as bibliotecas Node.js.
-```
-npm run dev
-```
-
-Acessar o conteúdo padrão do Laravel
-```
-http://127.0.0.1:8000
-```

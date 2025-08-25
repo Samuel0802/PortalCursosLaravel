@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             //Cadastrar o usuário
             User::create([
                 'name' => 'Samuel Souza',
+                'login' => 'samuel',
                 'email' => 'samuel@gmail.com',
                 'matricula' => 2174,
                 'password' => bcrypt('Samuel123'),

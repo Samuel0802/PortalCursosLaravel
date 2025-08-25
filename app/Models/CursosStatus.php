@@ -9,7 +9,6 @@ class CursosStatus extends Model
     protected $table = 'cursos_statuses';
 
     protected $fillable = [
-        'id',
         'name',
     ];
 }

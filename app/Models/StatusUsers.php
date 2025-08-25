@@ -11,7 +11,6 @@ class StatusUsers extends Model
 
      // Indicar quais colunas podem ser manipuladas
     protected $fillable = [
-        'id',
         'name'
     ];
 }
