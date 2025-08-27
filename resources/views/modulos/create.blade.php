@@ -13,7 +13,7 @@
        @method('POST')
 
        <label>Nome:</label>
-       <input type="text" name="name" id="name" placeholder="Nome do Modulo" required/>
+       <input type="text" name="name" id="name" placeholder="Nome do Modulo" value={{ old('name') }} required/>
 
        <button type="submit">Cadastrar</button>
 

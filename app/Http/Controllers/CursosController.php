@@ -46,6 +46,30 @@ class CursosController extends Controller
         //Redireciona o usuario, caso houver erro ao cadastrar o curso
         return redirect()->route('cursos.create')->with('error', 'Erro ao cadastrar o curso');
       }
+    }
+
+    //Carregar o formulário editar Cursos
+    public function edit(Cursos $cursos){
+
+     return view('cursos.edit', ['cursos' => $cursos]);
+
+    }
+
+    //Função de update de cursos
+    public function update(Request $request, Cursos $cursos){
+
+       try {
+
+       $cursos->update([
+         'name' => $request->input('name')
+       ]);
+
+       return redirect()->route('cursos.show', ['cursos' => $cursos])->with('success', 'Curso Atualizado com Sucesso');
+
+       } catch (\Exception $e) {
+
+        return redirect()->route('cursos.show', ['cursos' => $cursos])->with('error', 'Erro ao Atualizar o Curso');
+       }
 
     }
 }

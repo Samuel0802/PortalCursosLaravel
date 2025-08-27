@@ -6,19 +6,13 @@
       <a href="{{ route('aulas.create') }}">Cadastrar Aulas</a>
 
  <br><br><br>
-      {{-- @foreach ($aulas as $aula)
-
-       Id: {{ $aula->id }}<br>
-       Nome: {{ $aula->name }}<br>
-<hr>
-
-      @endforeach --}}
 
       @forelse ($aulas as $aula)
          Id: {{ $aula->id }}<br>
          Nome: {{ $aula->name }}<br>
 
          <a href="{{ route('aulas.show' , ['aulas' => $aula->id]) }}"> Visualizar</a><br>
+          <a href="{{ route('aulas.edit' , ['aulas' => $aula->id]) }}"> Editar</a><br>
 
          <hr>
 

@@ -17,7 +17,8 @@
           EMAIL: {{ $user->email }}<br>
           MATRICULA: {{ $user->matricula }}<br>
 
-          <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar</a><br><br>
+          <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar</a><br>
+          <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar</a><br>
 
           <BR>
 

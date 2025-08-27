@@ -36,4 +36,28 @@ class StatusUsersController extends Controller
        return redirect()->route('status_users.create')->with('error', 'Erro ao Cadastrar Status Users');
       }
    }
+
+       //Carregar o formulário editar Status Users
+   public function edit(StatusUsers $status){
+    return view('status_users.edit', ['status' => $status]);
+
+   }
+
+   //Realizar a função de update do Status Users
+   public function update(Request $request, StatusUsers $status){
+
+   try {
+      $status->update([
+        'name' => $request->input('name'),
+    ]);
+
+    return redirect()->route('status_users.show', ['status' => $status])->with('success', 'Status Users Atualizado com Sucesso');
+
+   } catch (\Exception $e) {
+
+    return redirect()->route('status_users.show', ['status' => $status])->with('error', 'Erro ao Atualizar o Status Users');
+
+   }
+
+   }
 }

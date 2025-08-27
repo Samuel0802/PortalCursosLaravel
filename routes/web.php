@@ -18,6 +18,18 @@ Route::prefix('users')->group(function () {
     Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/', [UserController::class, 'store'])->name('users.store');
+    Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
+});
+
+//ROTA DE STATUS USERS
+Route::prefix('status-users')->group(function () {
+    Route::get('/', [StatusUsersController::class, 'index'])->name('status_users.index');
+    Route::get('/{status}', [StatusUsersController::class, 'show'])->name('status_users.show');
+    Route::get('/create', [StatusUsersController::class, 'create'])->name('status_users.create');
+    Route::post('/', [StatusUsersController::class, 'store'])->name('status_users.store');
+    Route::get('/{status}/edit', [StatusUsersController::class, 'edit'])->name('status_users.edit');
+    Route::put('/{status}', [StatusUsersController::class, 'update'])->name('status_users.update');
 });
 
 //ROTA DE CADASTRAR CURSOS
@@ -26,6 +38,8 @@ Route::prefix('cursos')->group(function () {
     Route::get('/create', [CursosController::class, 'create'])->name('cursos.create');
     Route::get('/{cursos}', [CursosController::class, 'show'])->name('cursos.show');
     Route::post('/', [CursosController::class, 'store'])->name('cursos.store');
+    Route::get('/{cursos}/edit', [CursosController::class, 'edit'])->name('cursos.edit');
+    Route::put('/{cursos}', [CursosController::class, 'update'])->name('cursos.update');
 });
 
 //ROTA DE STATUS CURSOS
@@ -34,6 +48,8 @@ Route::prefix('cursos-status')->group(function () {
     Route::get('/create', [CursosStatusController::class, 'create'])->name('cursos_statuses.create');
     Route::post('/', [CursosStatusController::class, 'store'])->name('cursos_statuses.store');
     Route::get('/{cursosstatus}', [CursosStatusController::class, 'show'])->name('cursos_statuses.show');
+    Route::get('/{cursosstatus}/edit', [CursosStatusController::class, 'edit'])->name('cursos_statuses.edit');
+    Route::put('/{cursosstatus}', [CursosStatusController::class, 'update'])->name('cursos_statuses.update');
 });
 
 //ROTA DE GRUPO CURSOS
@@ -42,6 +58,8 @@ Route::prefix('cursos-grupos')->group(function () {
     Route::get('/create', [CursosGrupoController::class, 'create'])->name('cursos_grupo.create');
     Route::post('/', [CursosGrupoController::class, 'store'])->name('cursos_grupo.store');
     Route::get('/{grupo}', [CursosGrupoController::class, 'show'])->name('cursos_grupo.show');
+    Route::get('/{grupo}/edit', [CursosGrupoController::class, 'edit'])->name('cursos_grupo.edit');
+    Route::put('/{grupo}', [CursosGrupoController::class, 'update'])->name('cursos_grupo.update');
 });
 
 
@@ -51,13 +69,16 @@ Route::prefix('modulos')->group(function () {
     Route::get('/create', [ModulosController::class, 'create'])->name('modulos.create');
     Route::post('/', [ModulosController::class, 'store'])->name('modulos.store');
     Route::get('/{modulo}', [ModulosController::class, 'show'])->name('modulos.show');
+    Route::get('/{modulo}/edit', [ModulosController::class, 'edit'])->name('modulos.edit');
+    Route::put('/{modulo}', [ModulosController::class, 'update'])->name('modulos.update');
 });
 
-
-//ROTA DE STATUS USERS
-Route::prefix('status-users')->group(function () {
-    Route::get('/', [StatusUsersController::class, 'index'])->name('status_users.index');
-    Route::get('/{status}', [StatusUsersController::class, 'show'])->name('status_users.show');
-    Route::get('/create', [StatusUsersController::class, 'create'])->name('status_users.create');
-    Route::post('/', [StatusUsersController::class, 'store'])->name('status_users.store');
+//ROTA DE AULAS
+Route::prefix('aulas')->group(function () {
+    Route::get('/', [AulasController::class, 'index'])->name('aulas.index');
+    Route::get('/create', [AulasController::class, 'create'])->name('aulas.create');
+    Route::get('/{aulas}', [AulasController::class, 'show'])->name('aulas.show');
+    Route::post('/', [AulasController::class, 'store'])->name('aulas.store');
+    Route::get('/{aulas}/edit', [AulasController::class, 'edit'])->name('aulas.edit');
+    Route::put('/{aulas}', [AulasController::class, 'update'])->name('aulas.update');
 });

@@ -7,8 +7,9 @@
 
    <x-alert-success/>
 
-      <a href="{{ route('cursos_statuses.index') }}">listar Status do Curso</a>
-       <br> <br> <br>
+      <a href="{{ route('cursos_statuses.index') }}">listar</a><br>
+      <a href="{{ route('cursos_statuses.edit', ['cursosstatus' => $cursosstatus->id])}}">Editar</a>
+       <br> <br>
 
 
      Id: {{ $cursosstatus->id }}<br>

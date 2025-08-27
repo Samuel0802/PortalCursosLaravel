@@ -42,6 +42,28 @@ class CursosGrupoController extends Controller
      return redirect()->route('cursos_grupo.create')->with('error', 'Erro ao Cadastrar o Curso Grupo ' . $e->getMessage());
      }
 
+    }
+
+    public function edit(CursosGrupo $grupo){
+
+       return view('curso_grupos.edit', ['grupo' => $grupo]);
+
+    }
+
+    public function update(Request $request, CursosGrupo $grupo){
+
+        try {
+            $grupo->update([
+              'name' => $request->input('name'),
+            ]);
+
+           return redirect()->route('cursos_grupo.show', ['grupo' => $grupo])->with('success', 'Curso Grupo Atualizado com Successo');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('cursos_grupo.show', ['grupo' => $grupo])->with('error', 'Error ao Atualizar o Curso Grupo');
+
+        }
 
     }
 

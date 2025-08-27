@@ -7,7 +7,8 @@
 
         <br>
 
-        <a href="{{ route('cursos_grupo.index') }}">Listar Grupos Cursos</a>
+        <a href="{{ route('cursos_grupo.index') }}">Listar </a><br>
+        <a href="{{ route('cursos_grupo.edit', ['grupo' => $grupo->id]) }}">Editar</a><br>
 
         <br>  <br>  <br>
 

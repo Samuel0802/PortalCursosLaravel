@@ -16,10 +16,10 @@ class AulasController extends Controller
     }
 
     //Visualizar aulas
-    public function show(Aulas $aulas){
+    public function show(Aulas $aulas)
+    {
 
-         return view('aulas.show', ['aula' => $aulas]);
-
+        return view('aulas.show', ['aula' => $aulas]);
     }
 
     public function create()
@@ -37,13 +37,31 @@ class AulasController extends Controller
                 'updated_at' => now(),
             ]);
 
-          //successo ?
-          return redirect()->route('aulas.index')->with('success', 'Aula Cadastrada com Sucesso!');
-
+            //successo ?
+            return redirect()->route('aulas.index')->with('success', 'Aula Cadastrada com Sucesso!');
         } catch (\Exception $e) {
-           //erro!
-           return redirect()->route('aulas.create')->with('error', 'Erro ao Cadastrar a Aula');
+            //erro!
+            return redirect()->route('aulas.create')->with('error', 'Erro ao Cadastrar a Aula');
+        }
+    }
 
+    public function edit(Aulas $aulas)
+    {
+
+        return view('aulas.edit', ['aulas' => $aulas]);
+    }
+
+    public function update(Request $request, Aulas $aulas)
+    {
+        try {
+            $aulas->update([
+                'name' => $request->input('name')
+            ]);
+
+            return redirect()->route('aulas.show', ['aulas' => $aulas])->with('success', 'Aula Atualizada com Sucesso');
+        } catch (\Exception $e) {
+
+            return redirect()->route('aulas.show', ['aulas' => $aulas])->with('error', 'Error ao Atualizar a Aula');
         }
     }
 }

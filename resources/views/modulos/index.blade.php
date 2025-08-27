@@ -15,6 +15,7 @@
        ID: {{ $modulo->id }}<br>
        NOME: {{ $modulo->name }}<br>
        <a href="{{ route('modulos.show', ['modulo' => $modulo->id]) }}">Visualizar</a><br>
+        <a href="{{ route('modulos.edit', ['modulo' => $modulo->id]) }}">Editar</a><br>
 
        <hr>
 

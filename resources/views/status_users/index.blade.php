@@ -10,8 +10,10 @@
         ID: {{ $usersStatus->id }}<br>
         NOME: {{ $usersStatus->name }}<br>
 
-        <a href="{{ route('status_users.show', ['status' => $usersStatus->id]) }}">Visualizar</a><br><br>
+        <a href="{{ route('status_users.show', ['status' => $usersStatus->id]) }}">Visualizar</a><br>
+        <a href="{{ route('status_users.edit', ['status' => $usersStatus->id]) }}" >Editar</a><br>
 
+        <hr>
 
     @empty
         <p>Sem Registro de Status</p>
