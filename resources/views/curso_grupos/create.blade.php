@@ -1,3 +1,7 @@
+@extends('layouts.layout')
+@section('content')
+
+
 <div>
 
     <h2>Cadastrar o Grupo do Curso</h2>
@@ -6,7 +10,7 @@
     <x-alert-error/>
 
 
-    <form action="{{ route('cursosgrupo.store') }}" method="post">
+    <form action="{{ route('cursos_grupo.store') }}" method="post">
        @csrf
        @method('POST')
 
@@ -17,3 +21,5 @@
 
     </form>
 </div>
+
+@endsection

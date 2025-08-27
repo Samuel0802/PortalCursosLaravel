@@ -8,7 +8,15 @@ use Illuminate\Http\Request;
 class ModulosController extends Controller
 {
     public function index(){
-       return view('modulos.index');
+
+        //listar os modulos cadastrados no banco de dados
+        $modulos = Modulos::orderBy('id', 'desc')->get();
+
+       return view('modulos.index', ['modulos' => $modulos]);
+    }
+
+    public function show(Modulos $modulo){
+        return view('modulos.show' , ['modulo' => $modulo]);
     }
 
     public function create(){

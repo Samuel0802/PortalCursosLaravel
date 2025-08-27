@@ -8,15 +8,23 @@ use Illuminate\Http\Request;
 class CursosGrupoController extends Controller
 {
     public function index(){
-      return view('cursosgrupo.index');
+
+      //Listar Grupos de Cursos
+      $grupos = CursosGrupo::orderBy('id', 'desc')->get();
+
+      return view('curso_grupos.index', ['grupos' => $grupos]);
     }
 
     public function create(){
-      return view('cursosgrupo.create');
+      return view('curso_grupos.create');
+    }
+
+    public function show(CursosGrupo $grupo){
+
+        return view('curso_grupos.show' , ['grupo' => $grupo]);
     }
 
     public function store(Request $request){
-    //   dd($request);
 
      try {
 
@@ -27,11 +35,11 @@ class CursosGrupoController extends Controller
         'updated_at' => now(),
      ]);
 
-     return redirect()->route('cursosgrupo.index')->with('success', 'Curso Grupo Cadastrado com Sucesso!');
+     return redirect()->route('cursos_grupo.index')->with('success', 'Curso Grupo Cadastrado com Sucesso!');
 
      } catch (\Exception $e) {
      //Redireciona o usuario, caso houver erro ao cadastrar o curso grupo
-     return redirect()->route('cursosgrupo.create')->with('error', 'Erro ao Cadastrar o Curso Grupo ' . $e->getMessage());
+     return redirect()->route('cursos_grupo.create')->with('error', 'Erro ao Cadastrar o Curso Grupo ' . $e->getMessage());
      }
 
 

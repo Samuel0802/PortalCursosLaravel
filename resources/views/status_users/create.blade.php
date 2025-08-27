@@ -1,10 +1,13 @@
+@extends('layouts.layout')
+@section('content')
+
 <div>
 
     <h2>Cadastrar Status Users</h2>
 
     <x-alert-error/>
 
-    <form action="{{ route('statususers.store') }}" method="post">
+    <form action="{{ route('status_users.store') }}" method="post">
        @csrf
        @method('POST')
 
@@ -15,3 +18,5 @@
 
     </form>
 </div>
+
+@endsection

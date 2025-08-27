@@ -8,7 +8,17 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-      return view('users.index');
+
+        //Listar os usuarios
+        $users = User::orderBy('id', 'desc')->get();
+
+      return view('users.index', ['users' => $users]);
+    }
+
+    //Visualizar detalhe do user
+    public function show(User $user){
+
+     return view('users.show', ['user' => $user]);
     }
 
     public function create(){

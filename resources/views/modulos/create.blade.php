@@ -1,3 +1,7 @@
+@extends('layouts.layout')
+@section('content')
+
+
 <div>
 
     <h2>Cadastrar os Modulos</h2>
@@ -15,3 +19,5 @@
 
     </form>
 </div>
+
+@endsection

@@ -1,14 +1,14 @@
+@extends('layouts.layout')
+@section('content')
+
+
 <div>
 
     <h2>Cadastrar Status Cursos</h2>
 
-    @if(session('error'))
+ <x-alert-error/>
 
-    <p style="color: red">{{ session('error') }}</p>
-
-    @endif
-
-    <form action="{{ route('cursosstatus.store') }}" method="post">
+    <form action="{{ route('cursos_statuses.store') }}" method="post">
        @csrf
        @method('POST')
 
@@ -19,3 +19,6 @@
 
     </form>
 </div>
+
+
+@endsection

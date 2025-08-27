@@ -1,3 +1,7 @@
+@extends('layouts.layout')
+@section('content')
+
+
 <div>
 
     <h2>Cadastrar o Curso</h2>
@@ -15,3 +19,6 @@
 
     </form>
 </div>
+
+
+@endsection

@@ -9,7 +9,17 @@ class AulasController extends Controller
 {
     public function index()
     {
-        return view('aulas.index');
+        //Listar todas as aulas
+        $aulas = Aulas::orderBy('id', 'desc')->get();
+
+        return view('aulas.index', ['aulas' =>  $aulas]);
+    }
+
+    //Visualizar aulas
+    public function show(Aulas $aulas){
+
+         return view('aulas.show', ['aula' => $aulas]);
+
     }
 
     public function create()

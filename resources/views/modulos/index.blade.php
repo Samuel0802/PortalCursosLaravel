@@ -1,3 +1,7 @@
+@extends('layouts.layout')
+@section('content')
+
+
 <div>
     <h2>Listar os Modulos</h2>
 
@@ -5,4 +9,18 @@
 
       <a href="{{ route('modulos.create') }}">Cadastrar Modulos</a>
 
+      <br> <br> <br>
+
+      @foreach ($modulos as $modulo)
+       ID: {{ $modulo->id }}<br>
+       NOME: {{ $modulo->name }}<br>
+       <a href="{{ route('modulos.show', ['modulo' => $modulo->id]) }}">Visualizar</a><br>
+
+       <hr>
+
+
+      @endforeach
+
 </div>
+
+@endsection

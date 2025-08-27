@@ -10,43 +10,54 @@ use App\Http\Controllers\StatusUsersController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',[MainController::class, 'index'])->name('home');
+Route::get('/', [MainController::class, 'index'])->name('home');
 
 //ROTA DE USUARIOS
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users-create', [UserController::class, 'create'])->name('users.create');
-Route::post('/users-store',[UserController::class, 'store'])->name('users.store');
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
+    Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/', [UserController::class, 'store'])->name('users.store');
+});
 
 //ROTA DE CADASTRAR CURSOS
-Route::get('/cursos', [CursosController::class, 'index'])->name('cursos.index');
-Route::get('/create-curso', [CursosController::class, 'create'])->name('cursos.create');
-Route::post('/store-curso', [CursosController::class, 'store'])->name('cursos.store');
-
+Route::prefix('cursos')->group(function () {
+    Route::get('/', [CursosController::class, 'index'])->name('cursos.index');
+    Route::get('/create', [CursosController::class, 'create'])->name('cursos.create');
+    Route::get('/{cursos}', [CursosController::class, 'show'])->name('cursos.show');
+    Route::post('/', [CursosController::class, 'store'])->name('cursos.store');
+});
 
 //ROTA DE STATUS CURSOS
-Route::get('/cursos-status', [CursosStatusController::class, 'index'])->name('cursosstatus.index');
-Route::get('/cursosstatus-create', [CursosStatusController::class, 'create'])->name('cursosstatus.create');
-Route::post('/cursosstatus-store', [CursosStatusController::class, 'store'])->name('cursosstatus.store');
-
+Route::prefix('cursos-status')->group(function () {
+    Route::get('/', [CursosStatusController::class, 'index'])->name('cursos_statuses.index');
+    Route::get('/create', [CursosStatusController::class, 'create'])->name('cursos_statuses.create');
+    Route::post('/', [CursosStatusController::class, 'store'])->name('cursos_statuses.store');
+    Route::get('/{cursosstatus}', [CursosStatusController::class, 'show'])->name('cursos_statuses.show');
+});
 
 //ROTA DE GRUPO CURSOS
-Route::get('/cursos-grupo', [CursosGrupoController::class, 'index'])->name('cursosgrupo.index');
-Route::get('/cursosgrupo-create', [CursosGrupoController::class, 'create'])->name('cursosgrupo.create');
-Route::post('/cursosgrupo-store', [CursosGrupoController::class, 'store'])->name('cursosgrupo.store');
+Route::prefix('cursos-grupos')->group(function () {
+    Route::get('/', [CursosGrupoController::class, 'index'])->name('cursos_grupo.index');
+    Route::get('/create', [CursosGrupoController::class, 'create'])->name('cursos_grupo.create');
+    Route::post('/', [CursosGrupoController::class, 'store'])->name('cursos_grupo.store');
+    Route::get('/{grupo}', [CursosGrupoController::class, 'show'])->name('cursos_grupo.show');
+});
 
-//ROTA DE AULAS
-Route::get('/aulas', [AulasController::class, 'index'])->name('aulas.index');
-Route::get('/aulas-create', [AulasController::class, 'create'])->name('aulas.create');
-Route::post('/aulas-store', [AulasController::class, 'store'])->name('aulas.store');
 
 //ROTA DE MODULOS
-Route::get('/modulos', [ModulosController::class, 'index'])->name('modulos.index');
-Route::get('/modulos-create', [ModulosController::class, 'create'])->name('modulos.create');
-Route::post('/modulos-store', [ModulosController::class, 'store'])->name('modulos.store');
+Route::prefix('modulos')->group(function () {
+    Route::get('/', [ModulosController::class, 'index'])->name('modulos.index');
+    Route::get('/create', [ModulosController::class, 'create'])->name('modulos.create');
+    Route::post('/', [ModulosController::class, 'store'])->name('modulos.store');
+    Route::get('/{modulo}', [ModulosController::class, 'show'])->name('modulos.show');
+});
 
 
 //ROTA DE STATUS USERS
-Route::get('/status-users', [StatusUsersController::class, 'index'])->name('statususers.index');
-Route::get('/status-users-create', [StatusUsersController::class, 'create'])->name('statususers.create');
-Route::post('/status-users-store', [StatusUsersController::class, 'store'])->name('statususers.store');
-
+Route::prefix('status-users')->group(function () {
+    Route::get('/', [StatusUsersController::class, 'index'])->name('status_users.index');
+    Route::get('/{status}', [StatusUsersController::class, 'show'])->name('status_users.show');
+    Route::get('/create', [StatusUsersController::class, 'create'])->name('status_users.create');
+    Route::post('/', [StatusUsersController::class, 'store'])->name('status_users.store');
+});

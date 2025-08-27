@@ -9,7 +9,19 @@ class CursosController extends Controller
 {
 
     public function index(){
-        return view('cursos.index');
+
+        //recuperar os registro do banco de dados cursos
+       $cursos = Cursos::orderBy('id', 'desc')->get();
+    //    dd($cursos);
+
+        return view('cursos.index', ['cursos' => $cursos]);
+    }
+
+    //Visualizar Cursos
+    public function show(Cursos $cursos){
+
+      //carregar uma view
+      return view('cursos.show', ['cursos' =>  $cursos]);
     }
 
     //Carregar o formulário cadastrar novo curso

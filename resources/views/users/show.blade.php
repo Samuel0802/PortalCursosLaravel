@@ -6,23 +6,21 @@
 
     <x-alert-success/>
 
-      <a href="{{ route('users.create') }}">Cadastrar Status Users</a>
+      <a href="{{ route('users.index') }}">Listar Users</a>
 
       <br><br><br>
 
-      @foreach ($users as $user)
           ID: {{ $user->id }}<br>
           NOME: {{ $user->name }}<br>
           LOGIN: {{ $user->login }}<br>
           EMAIL: {{ $user->email }}<br>
           MATRICULA: {{ $user->matricula }}<br>
-
-          <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar</a><br><br>
+          Cadastrado: {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }}<br>
+          Atualizado: {{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y H:i:s') }}<br>
 
           <BR>
 
 
-      @endforeach
 
 </div>
 
