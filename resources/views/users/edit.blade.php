@@ -6,8 +6,9 @@
     <h2>Editar Users</h2>
 
     <a href="{{ route('users.index') }}">Listar Users</a><br>
+    <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar Users</a><br>
 
-    <a>Visualizar Users</a><br><br><br>
+<br><br>
 
     <x-alert-error/>
     <x-alert-success/>

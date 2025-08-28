@@ -8,6 +8,7 @@
 
       <a href="{{ route('users.index') }}">Listar Users</a><br>
       <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar Users</a><br>
+      <a href="{{ route('users.edit_password', ['user' => $user->id]) }}">Editar Senha</a><br>
 
       <br><br><br>
 

@@ -77,7 +77,53 @@ class UserController extends Controller
         }
     }
 
-    public function destroy(User $user){
+
+     //Carregar o formulário editar Password Users
+    public function editPassword(User $user){
+
+        return view('users.edit_password', ['user' => $user]);
+    }
+
+    public function updatePassword(Request $request, User $user){
+
+         $regras = [
+            'password' => 'required|min:6',
+
+         ];
+
+         $feedback = [
+            'password.required' => 'Campo Nova Senha Obrigátoria!',
+             'password.min' => "Senha com no Mínimo :min Caracteres!"
+         ];
+
+         $request->validate($regras, $feedback);
+
+          try {
+
+            $user->update([
+
+                'password' => $request->input('password'),
+            ]);
+
+            return redirect()->route('users.show', ['user' => $user])->with('success', 'Nova Senha Atualizado Com Sucesso');
+        } catch (\Exception $e) {
+
+            return redirect()->route('users.show', ['user' => $user])->with('error', 'Erro ao Atualizar a Nova Senha');
+        }
 
     }
+
+    public function destroy(User $user){
+
+        try {
+           $user->delete();
+
+           return redirect()->route('users.index')->with('success', 'Usuario Excluido com Sucesso');
+
+        } catch (\Exception $e) {
+               return redirect()->route('users.index')->with('error', ' Error ao Excluido Usuario com Sucesso');
+        }
+    }
+
+
 }
