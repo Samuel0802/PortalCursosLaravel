@@ -18,7 +18,7 @@
 
             <label>Nome:</label>
             <input type="text" name="name" id="name" placeholder="Nome do Grupo"
-                value="{{ old('name', $grupo->name) }}" required />
+                value="{{ old('name', $grupo->name) }}" />
 
             <button type="submit">Salvar</button>
 

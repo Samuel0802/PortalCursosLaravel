@@ -15,7 +15,7 @@
        @method('POST')
 
        <label>Nome:</label>
-       <input type="text" name="name" id="name" placeholder="Nome do Grupo" value="{{ old('name') }}" required/>
+       <input type="text" name="name" id="name" placeholder="Nome do Grupo" value="{{ old('name') }}" />
 
        <button type="submit">Cadastrar</button>
 

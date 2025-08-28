@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CursosRequest;
 use App\Models\Cursos;
-use Illuminate\Http\Request;
+
 
 class CursosController extends Controller
 {
@@ -29,7 +30,7 @@ class CursosController extends Controller
         return view('cursos.create');
     }
 
-    public function store(Request $request){
+    public function store(CursosRequest $request){
         // dd($request);
          //Cadastrar no banco de dados na tabela cursos
 
@@ -56,7 +57,7 @@ class CursosController extends Controller
     }
 
     //Função de update de cursos
-    public function update(Request $request, Cursos $cursos){
+    public function update(CursosRequest $request, Cursos $cursos){
 
        try {
 

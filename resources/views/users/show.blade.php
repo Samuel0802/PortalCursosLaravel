@@ -6,7 +6,8 @@
 
     <x-alert-success/>
 
-      <a href="{{ route('users.index') }}">Listar Users</a>
+      <a href="{{ route('users.index') }}">Listar Users</a><br>
+      <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar Users</a><br>
 
       <br><br><br>
 

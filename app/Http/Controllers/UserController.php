@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
 
         try {
@@ -57,7 +58,7 @@ class UserController extends Controller
 
 
     //função de editar o Users
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
 
         try {
@@ -66,7 +67,7 @@ class UserController extends Controller
                 'name' => $request->input('name'),
                 'login' => $request->input('login'),
                 'email' => $request->input('email'),
-                'password' => $request->input('password'),
+
             ]);
 
             return redirect()->route('users.show', ['user' => $user])->with('success', 'Usuario Atualizado Com Sucesso');

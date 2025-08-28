@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AulasRequest;
 use App\Models\Aulas;
 use Illuminate\Http\Request;
 
@@ -27,14 +28,13 @@ class AulasController extends Controller
         return view('aulas.create');
     }
 
-    public function store(Request $request)
+    public function store(AulasRequest $request)
     {
 
         try {
             Aulas::create([
                 'name' => $request->input('name'),
-                'created_at' => now(),
-                'updated_at' => now(),
+
             ]);
 
             //successo ?
@@ -51,7 +51,7 @@ class AulasController extends Controller
         return view('aulas.edit', ['aulas' => $aulas]);
     }
 
-    public function update(Request $request, Aulas $aulas)
+    public function update(AulasRequest $request, Aulas $aulas)
     {
         try {
             $aulas->update([

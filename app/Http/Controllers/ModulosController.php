@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ModulosRequest;
 use App\Models\Modulos;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class ModulosController extends Controller
         return view('modulos.create');
     }
 
-    public function store(Request $request)
+    public function store(ModulosRequest $request)
     {
 
         try {
@@ -49,7 +50,7 @@ class ModulosController extends Controller
         return view('modulos.edit', ['modulo' => $modulo]);
     }
 
-    public function update(Request $request, Modulos $modulo)
+    public function update(ModulosRequest $request, Modulos $modulo)
     {
 
         try {

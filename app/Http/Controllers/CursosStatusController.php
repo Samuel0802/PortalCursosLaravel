@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CursosStatusRequest;
 use App\Models\CursosStatus;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class CursosStatusController extends Controller
         return view('curso_status.create');
     }
 
-    public function store(Request $request)
+    public function store(CursosStatusRequest $request)
     {
 
         //Criando no Status do curso
@@ -53,7 +54,7 @@ class CursosStatusController extends Controller
         return view('curso_status.edit', ['cursosstatus' => $cursosstatus]);
     }
 
-    public function update(Request $request, CursosStatus $cursosstatus)
+    public function update(CursosStatusRequest  $request, CursosStatus $cursosstatus)
     {
 
         try {

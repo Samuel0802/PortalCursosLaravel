@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StatusUsersRequest;
 use App\Models\StatusUsers;
 use Illuminate\Http\Request;
 
@@ -22,12 +23,11 @@ class StatusUsersController extends Controller
     return view('status_users.create');
    }
 
-   public function store(Request $request){
+   public function store(StatusUsersRequest $request){
+
       try {
         StatusUsers::create([
           'name' => $request->input('name'),
-          'created_at' => now(),
-          'updated_at' => now(),
         ]);
 
        return redirect()->route('status_users.index')->with('success', 'Status Users Cadastrado com sucesso');
@@ -44,7 +44,7 @@ class StatusUsersController extends Controller
    }
 
    //Realizar a função de update do Status Users
-   public function update(Request $request, StatusUsers $status){
+   public function update(StatusUsersRequest $request, StatusUsers $status){
 
    try {
       $status->update([

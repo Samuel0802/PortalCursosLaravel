@@ -12,7 +12,7 @@
        @method('POST')
 
        <label>Nome:</label>
-       <input type="text" name="name" id="name" placeholder="Nome do Curso" value="{{ old('name', $aulas->name) }}" required/>
+       <input type="text" name="name" id="name" placeholder="Nome do Curso" value="{{ old('name', $aulas->name) }}" />
 
        <button type="submit">Salvar</button>
 

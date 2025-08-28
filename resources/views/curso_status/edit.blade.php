@@ -16,7 +16,7 @@
        @method('PUT')
 
        <label>Nome:</label>
-       <input type="text" name="name" id="name" placeholder="Nome do status cursos" value="{{ old('name', $cursosstatus->name )}}" required/>
+       <input type="text" name="name" id="name" placeholder="Nome do status cursos" value="{{ old('name', $cursosstatus->name )}}" />
 
        <button type="submit">Salvar</button>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CursosGruposRequest;
 use App\Models\CursosGrupo;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,8 @@ class CursosGrupoController extends Controller
         return view('curso_grupos.show', ['grupo' => $grupo]);
     }
 
-    public function store(Request $request)
+    public function store(CursosGruposRequest $request)
     {
-
         try {
 
             //Cadastrar no banco de dados na tabela cursos grupo
@@ -42,7 +42,7 @@ class CursosGrupoController extends Controller
             return redirect()->route('cursos_grupo.index')->with('success', 'Curso Grupo Cadastrado com Sucesso!');
         } catch (\Exception $e) {
             //Redireciona o usuario, caso houver erro ao cadastrar o curso grupo
-            return redirect()->route('cursos_grupo.create')->with('error', 'Erro ao Cadastrar o Curso Grupo ' . $e->getMessage());
+            return redirect()->route('cursos_grupo.create')->with('error', 'Erro ao Cadastrar o Curso Grupo ');
         }
     }
 
@@ -52,7 +52,7 @@ class CursosGrupoController extends Controller
         return view('curso_grupos.edit', ['grupo' => $grupo]);
     }
 
-    public function update(Request $request, CursosGrupo $grupo)
+    public function update(CursosGruposRequest $request, CursosGrupo $grupo)
     {
 
         try {
