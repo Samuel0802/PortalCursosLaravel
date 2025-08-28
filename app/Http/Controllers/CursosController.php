@@ -12,7 +12,7 @@ class CursosController extends Controller
     public function index(){
 
         //recuperar os registro do banco de dados cursos
-       $cursos = Cursos::orderBy('id', 'desc')->get();
+       $cursos = Cursos::orderBy('id', 'desc')->paginate(10);
     //    dd($cursos);
 
         return view('cursos.index', ['cursos' => $cursos]);

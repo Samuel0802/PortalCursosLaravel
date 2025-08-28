@@ -10,7 +10,7 @@ class StatusUsersController extends Controller
 {
    public function index(){
 
-     $status = StatusUsers::orderBy('id', 'desc')->get();
+     $status = StatusUsers::orderBy('id', 'desc')->paginate(1);
 
      return view('status_users.index', ['status' => $status]);
    }

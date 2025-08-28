@@ -26,9 +26,10 @@
                 <button type="submit">Excluir</button>
 
             </form>
-
             <BR>
         @endforeach
+
+        {{ $users->links() }}
 
     </div>
 @endsection

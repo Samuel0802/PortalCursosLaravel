@@ -12,7 +12,7 @@ class CursosGrupoController extends Controller
     {
 
         //Listar Grupos de Cursos
-        $grupos = CursosGrupo::orderBy('id', 'desc')->get();
+        $grupos = CursosGrupo::orderBy('id', 'desc')->paginate(1);
 
         return view('curso_grupos.index', ['grupos' => $grupos]);
     }

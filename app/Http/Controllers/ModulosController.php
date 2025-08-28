@@ -12,7 +12,7 @@ class ModulosController extends Controller
     {
 
         //listar os modulos cadastrados no banco de dados
-        $modulos = Modulos::orderBy('id', 'desc')->get();
+        $modulos = Modulos::orderBy('id', 'desc')->paginate(10);
 
         return view('modulos.index', ['modulos' => $modulos]);
     }

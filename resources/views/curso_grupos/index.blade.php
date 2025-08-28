@@ -27,5 +27,7 @@
 
             <hr>
         @endforeach
+
+        {{ $grupos->links() }}
     </div>
 @endsection

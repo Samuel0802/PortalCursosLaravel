@@ -33,6 +33,8 @@
 
        @endforelse
 
+       {{ $cursos->links() }}
+
 
 
 </div>

@@ -34,6 +34,8 @@
     @endforelse
   <hr>
 
+  {{ $status->links() }}
+
 
 </div>
 

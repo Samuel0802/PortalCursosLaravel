@@ -29,4 +29,6 @@
         <p>Sem registros de Aulas</p>
 
       @endforelse
+
+      {{ $aulas->links() }}
 </div>

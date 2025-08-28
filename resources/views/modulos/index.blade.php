@@ -29,6 +29,8 @@
 
       @endforeach
 
+      {{ $modulos->links() }}
+
 </div>
 
 @endsection

@@ -26,5 +26,8 @@
 
             <hr>
         @endforeach
+
+
+        {{ $statusCurso->links() }}
     </div>
 @endsection

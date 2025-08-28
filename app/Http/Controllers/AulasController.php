@@ -11,7 +11,7 @@ class AulasController extends Controller
     public function index()
     {
         //Listar todas as aulas
-        $aulas = Aulas::orderBy('id', 'desc')->get();
+        $aulas = Aulas::orderBy('id', 'desc')->paginate(10);
 
         return view('aulas.index', ['aulas' =>  $aulas]);
     }
