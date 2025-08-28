@@ -66,4 +66,18 @@ class CursosStatusController extends Controller
             return redirect()->route('cursos.edit', ['cursosstatus' => $cursosstatus])->with('error', 'Erro ao Atualizar o Status do Curso');
         }
     }
+
+
+    public function destroy(CursosStatus $cursosstatus)
+    {
+
+        try {
+            $cursosstatus->delete();
+
+            return redirect()->route('cursos_statuses.index')->with('success', 'Status do Curso Excluido com Sucesso');
+        } catch (\Exception $e) {
+
+            return redirect()->route('cursos_statuses.index')->with('error', 'Error ao Excluir o Status do Curso');
+        }
+    }
 }

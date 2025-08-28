@@ -75,4 +75,8 @@ class UserController extends Controller
             return redirect()->route('users.show', ['user' => $user])->with('error', 'Erro ao Atualizar o Usuario');
         }
     }
+
+    public function destroy(User $user){
+
+    }
 }

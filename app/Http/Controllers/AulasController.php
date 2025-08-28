@@ -64,4 +64,16 @@ class AulasController extends Controller
             return redirect()->route('aulas.show', ['aulas' => $aulas])->with('error', 'Error ao Atualizar a Aula');
         }
     }
+
+    public function destroy(Aulas $aulas)
+    {
+
+        try {
+            $aulas->delete();
+
+            return redirect()->route('aulas.index')->with('success', 'Aula Excluida com Sucesso');
+        } catch (\Exception $e) {
+            return redirect()->route('aulas.index')->with('success', 'Aula Excluida com Sucesso');
+        }
+    }
 }

@@ -18,12 +18,22 @@
              <a href="{{ route('cursos.show', ['cursos' => $curso->id]) }}">Visualizar</a><br>
              <a href="{{ route('cursos.edit', ['cursos' => $curso->id]) }}">Editar</a><br>
 
+             <form action="{{ route('cursos.destroy', ['cursos' => $curso->id]) }}" method="POST">
+             @csrf
+             @method('delete')
+
+              <button type="submit" onclick="return confirm('Deseja realmente apagar esse registro?')">Apagar</button>
+
+             </form>
+
             <hr>
        @empty
 
          <p>Nenhum registro encontrado</p>
 
        @endforelse
+
+
 
 </div>
 

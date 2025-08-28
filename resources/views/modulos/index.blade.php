@@ -17,6 +17,13 @@
        <a href="{{ route('modulos.show', ['modulo' => $modulo->id]) }}">Visualizar</a><br>
         <a href="{{ route('modulos.edit', ['modulo' => $modulo->id]) }}">Editar</a><br>
 
+        <form action="{{ route('modulos.destroy', ['modulo' => $modulo->id]) }}" method="POST">
+            @csrf
+            @method('delete')
+
+            <button type="submit" onclick="return confirm('Deseja realmente apagar esse registro?')">Excluir</button>
+        </form>
+
        <hr>
 
 

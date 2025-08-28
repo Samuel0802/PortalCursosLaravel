@@ -16,6 +16,15 @@
             NOME: {{ $grupo->name }}<br>
             <a href="{{ route('cursos_grupo.show', ['grupo' => $grupo->id]) }}" >Visualizar</a><br>
             <a href="{{ route('cursos_grupo.edit', ['grupo' => $grupo->id]) }}" >Editar</a><br>
+
+            <form action="{{ route('cursos_grupo.destroy', ['grupo' => $grupo->id]) }}" method="POST">
+                @csrf
+                @method('delete')
+
+               <button type="submit" onclick="return confirm('Deseja realmente excluir?')">Excluir</button>
+
+            </fomr>
+
             <hr>
         @endforeach
     </div>

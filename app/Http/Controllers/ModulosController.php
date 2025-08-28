@@ -64,4 +64,17 @@ class ModulosController extends Controller
             return redirect()->route('modulos.show', ['modulo' => $modulo])->with('error', 'Error ao Atualizar o Modulo');
         }
     }
+
+    public function destroy(Modulos $modulo){
+         try {
+            $modulo->delete();
+
+            return redirect()->route('modulos.index')->with('success', 'Modulo Excluido com Sucesso');
+
+         } catch (\Exception $e) {
+
+            return redirect()->route('modulos.index')->with('error', 'Error ao Excluir o Modulo');
+         }
+
+    }
 }

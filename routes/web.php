@@ -20,6 +20,7 @@ Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'store'])->name('users.store');
     Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 //ROTA DE STATUS USERS
@@ -30,6 +31,7 @@ Route::prefix('status-users')->group(function () {
     Route::post('/', [StatusUsersController::class, 'store'])->name('status_users.store');
     Route::get('/{status}/edit', [StatusUsersController::class, 'edit'])->name('status_users.edit');
     Route::put('/{status}', [StatusUsersController::class, 'update'])->name('status_users.update');
+    Route::delete('/{status}', [StatusUsersController::class, 'destroy'])->name('status_users.destroy');
 });
 
 //ROTA DE CADASTRAR CURSOS
@@ -40,6 +42,7 @@ Route::prefix('cursos')->group(function () {
     Route::post('/', [CursosController::class, 'store'])->name('cursos.store');
     Route::get('/{cursos}/edit', [CursosController::class, 'edit'])->name('cursos.edit');
     Route::put('/{cursos}', [CursosController::class, 'update'])->name('cursos.update');
+    Route::delete('/{cursos}', [CursosController::class, 'destroy'])->name('cursos.destroy');
 });
 
 //ROTA DE STATUS CURSOS
@@ -50,6 +53,7 @@ Route::prefix('cursos-status')->group(function () {
     Route::get('/{cursosstatus}', [CursosStatusController::class, 'show'])->name('cursos_statuses.show');
     Route::get('/{cursosstatus}/edit', [CursosStatusController::class, 'edit'])->name('cursos_statuses.edit');
     Route::put('/{cursosstatus}', [CursosStatusController::class, 'update'])->name('cursos_statuses.update');
+    Route::delete('/{cursosstatus}', [CursosStatusController::class, 'destroy'])->name('cursos_statuses.destroy');
 });
 
 //ROTA DE GRUPO CURSOS
@@ -60,6 +64,7 @@ Route::prefix('cursos-grupos')->group(function () {
     Route::get('/{grupo}', [CursosGrupoController::class, 'show'])->name('cursos_grupo.show');
     Route::get('/{grupo}/edit', [CursosGrupoController::class, 'edit'])->name('cursos_grupo.edit');
     Route::put('/{grupo}', [CursosGrupoController::class, 'update'])->name('cursos_grupo.update');
+    Route::delete('/{grupo}', [CursosGrupoController::class, 'destroy'])->name('cursos_grupo.destroy');
 });
 
 
@@ -71,6 +76,7 @@ Route::prefix('modulos')->group(function () {
     Route::get('/{modulo}', [ModulosController::class, 'show'])->name('modulos.show');
     Route::get('/{modulo}/edit', [ModulosController::class, 'edit'])->name('modulos.edit');
     Route::put('/{modulo}', [ModulosController::class, 'update'])->name('modulos.update');
+    Route::delete('/{modulo}', [ModulosController::class, 'destroy'])->name('modulos.destroy');
 });
 
 //ROTA DE AULAS
@@ -81,4 +87,5 @@ Route::prefix('aulas')->group(function () {
     Route::post('/', [AulasController::class, 'store'])->name('aulas.store');
     Route::get('/{aulas}/edit', [AulasController::class, 'edit'])->name('aulas.edit');
     Route::put('/{aulas}', [AulasController::class, 'update'])->name('aulas.update');
+    Route::delete('/{aulas}', [AulasController::class, 'destroy'])->name('aulas.destroy');
 });

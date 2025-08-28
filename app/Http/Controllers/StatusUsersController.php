@@ -60,4 +60,17 @@ class StatusUsersController extends Controller
    }
 
    }
+
+   public function destroy(StatusUsers $status){
+
+    try {
+          $status->delete();
+
+         return redirect()->route('status_users.index')->with('success', 'Status Users Excluido com Sucesso');
+
+    } catch (\Exception $e) {
+            return redirect()->route('status_users.index')->with('error', 'Status Users Excluido com Sucesso');
+    }
+
+   }
 }

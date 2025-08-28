@@ -14,6 +14,14 @@
          <a href="{{ route('aulas.show' , ['aulas' => $aula->id]) }}"> Visualizar</a><br>
           <a href="{{ route('aulas.edit' , ['aulas' => $aula->id]) }}"> Editar</a><br>
 
+           <form action="{{ route('aulas.destroy', ['aulas' => $aula->id]) }}" method="POST">
+            @csrf
+            @method('delete')
+
+            <button type="submit" onclick="return confirm('Deseja realmente excluir?')"> Excluir</button>
+
+           </form>
+
          <hr>
 
       @empty

@@ -72,4 +72,18 @@ class CursosController extends Controller
        }
 
     }
+
+    //Excluir o curso do banco
+    public function destroy(Cursos $cursos){
+
+        try {
+           $cursos->delete();
+
+         return redirect()->route('cursos.index')->with('success', 'Curso Excluido com Sucesso');
+
+        } catch (\Exception $e) {
+
+              return redirect()->route('cursos.index')->with('error', 'Erro ao Excluir o Curso');
+        }
+    }
 }
