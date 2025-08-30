@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AulasRequest;
 use App\Models\Aulas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AulasController extends Controller
 {
@@ -12,6 +13,8 @@ class AulasController extends Controller
     {
         //Listar todas as aulas
         $aulas = Aulas::orderBy('id', 'desc')->paginate(10);
+
+        Log::info('Usuario listou as Aulas');
 
         return view('aulas.index', ['aulas' =>  $aulas]);
     }
@@ -32,14 +35,29 @@ class AulasController extends Controller
     {
 
         try {
-            Aulas::create([
+            $aula = Aulas::create([
                 'name' => $request->input('name'),
 
             ]);
 
+            Log::info(
+                'Usuario cadastrou uma Aula',
+                [
+                    'aula_id' => $aula->id,
+                ]
+            );
+
             //successo ?
             return redirect()->route('aulas.index')->with('success', 'Aula Cadastrada com Sucesso!');
         } catch (\Exception $e) {
+
+            Log::info(
+                'Error ao cadastrar uma Aula',
+                [
+                    'aula_id' => $e->getMessage(),
+                ]
+            );
+
             //erro!
             return redirect()->route('aulas.create')->with('error', 'Erro ao Cadastrar a Aula');
         }
@@ -58,8 +76,34 @@ class AulasController extends Controller
                 'name' => $request->input('name')
             ]);
 
+            //verifica se o campo existe na requisição e não é nulo.
+            if ($request->has('name')) {
+                Log::notice(
+                    "Usuario alterou Aula",
+                    [
+                        'aulas' => $aulas->id,
+                    ]
+                );
+            }
+
+            Log::info(
+                'Alterou aula com Sucesso',
+                [
+                    'aulas' => $aulas->id,
+                ]
+            );
+
+
+
             return redirect()->route('aulas.show', ['aulas' => $aulas])->with('success', 'Aula Atualizada com Sucesso');
         } catch (\Exception $e) {
+
+               Log::info(
+                'Error ao alterar aula',
+                [
+                    'error' => $e->getMessage(),
+                ]
+            );
 
             return redirect()->route('aulas.show', ['aulas' => $aulas])->with('error', 'Error ao Atualizar a Aula');
         }
@@ -71,8 +115,23 @@ class AulasController extends Controller
         try {
             $aulas->delete();
 
+                 Log::info(
+                'Usuario deletou aula',
+                [
+                    'aula' => $aulas->id,
+                ]
+            );
+
             return redirect()->route('aulas.index')->with('success', 'Aula Excluida com Sucesso');
         } catch (\Exception $e) {
+
+                 Log::critical(
+                'Error ao delatar aula',
+                [
+                    'error' => $e->getMessage(),
+                ]
+            );
+
             return redirect()->route('aulas.index')->with('success', 'Aula Excluida com Sucesso');
         }
     }

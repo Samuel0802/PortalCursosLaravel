@@ -58,6 +58,7 @@ return [
             'ignore_exceptions' => false,
         ],
 
+         //Salvar Tudo unico arquivo log
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
@@ -65,6 +66,7 @@ return [
             'replace_placeholders' => true,
         ],
 
+        //Salvar de forma diaria
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),

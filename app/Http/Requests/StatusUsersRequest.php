@@ -15,7 +15,9 @@ class StatusUsersRequest extends FormRequest
 
     public function rules(): array
     {
+      // pega o usuário da rota (se existir)
         $status_users = $this->route('status');
+
         return [
            'name' => 'required',
            // Status do user é unico (ignora o ID do usuário atual se for edição)

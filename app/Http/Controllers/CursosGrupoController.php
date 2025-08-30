@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CursosGruposRequest;
 use App\Models\CursosGrupo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CursosGrupoController extends Controller
 {
@@ -13,6 +14,9 @@ class CursosGrupoController extends Controller
 
         //Listar Grupos de Cursos
         $grupos = CursosGrupo::orderBy('id', 'desc')->paginate(1);
+
+        //Salvando Log Listando Cursos Modulos
+        Log::info('Listando Cursos Grupo');
 
         return view('curso_grupos.index', ['grupos' => $grupos]);
     }
@@ -33,14 +37,24 @@ class CursosGrupoController extends Controller
         try {
 
             //Cadastrar no banco de dados na tabela cursos grupo
-            CursosGrupo::create([
+           $CursosModulos = CursosGrupo::create([
                 'name' => $request->input('name'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
+             //Salvando Log Cadastrando Cursos Modulos
+            Log::info('Cadastrado Cursos Modulos', [
+                'CursosModulos_id' => $CursosModulos->id
+            ]);
+
             return redirect()->route('cursos_grupo.index')->with('success', 'Curso Grupo Cadastrado com Sucesso!');
         } catch (\Exception $e) {
+
+             Log::error('Cadastrado Cursos Modulos', [
+                'error' => $e->getMessage()
+            ]);
+
             //Redireciona o usuario, caso houver erro ao cadastrar o curso grupo
             return redirect()->route('cursos_grupo.create')->with('error', 'Erro ao Cadastrar o Curso Grupo ');
         }
@@ -60,8 +74,28 @@ class CursosGrupoController extends Controller
                 'name' => $request->input('name'),
             ]);
 
+            //Verifica se campo existe na requisição e não é nulo
+            if($request->has('name')){
+                Log::notice('Usuario alterou Cursos Grupo',
+                [
+                  'grupo_id' => $grupo->id,
+                ]);
+            }
+
+            //Log de confirmação
+            Log::info('usuario alterou com Sucesso',
+             [
+                'grupo' => $grupo->id,
+             ]);
+
             return redirect()->route('cursos_grupo.show', ['grupo' => $grupo])->with('success', 'Curso Grupo Atualizado com Successo');
         } catch (\Exception $e) {
+
+             //Log de confirmação
+            Log::error('Error ao alterar Cursos Grupo',
+             [
+                'error' => $e->getMessage(),
+             ]);
 
             return redirect()->route('cursos_grupo.show', ['grupo' => $grupo])->with('error', 'Error ao Atualizar o Curso Grupo');
         }
@@ -73,9 +107,22 @@ class CursosGrupoController extends Controller
         try {
             $grupo->delete();
 
+            //Salvando log de delete
+            Log::info('Usuario deletou Cursos Grupo',
+            [
+                'grupo' => $grupo->id
+            ]);
+
             return redirect()->route('cursos_grupo.index')->with('success', 'Curso Grupo Excluido com Sucesso');
 
         } catch (\Exception $e) {
+
+            //Salvar Log de Error
+            Log::critical('Error ao deletar Cursos Grupo',
+            [
+                 'error' => $e->getMessage()
+            ]);
+
             return redirect()->route('cursos_grupo.index')->with('error', 'Error ao Excluir o Curso Grupo');
         }
     }

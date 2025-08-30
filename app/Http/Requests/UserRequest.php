@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
             'login' => 'required|unique:users,login,' . ($user ? $user->id : null),
             // email obrigatório e único (mesmo esquema acima)
             'email' => 'required|email|unique:users,email,' . ($user ? $user->id : null),
-            'matricula' => 'required_if:matricula,!=null|numeric_if:matricula,!=null|unique:users,matricula',
+            'matricula' => 'required_if:matricula,!=null|unique:users,matricula',
             // senha: só obrigatória se vier no request, e precisa de pelo menos 6 caracteres
             'password' => 'required_if:password,!=null|min:6'
 
@@ -42,7 +42,6 @@ class UserRequest extends FormRequest
             'email.unique' => 'Email já cadastrado',
             'email.email' => 'Necessário um Email válido',
             'matricula.required' => 'Campo Matricula é Obrigátorio',
-            'matricula.numeric' => 'Necessário Matricula númerica',
             'matricula.unique' => 'Matricula já Cadastrado!',
             'password.required' => 'Campo Senha é Obrigatório!',
             'password.min' => 'Senha com Minimo :min Caracteres!'

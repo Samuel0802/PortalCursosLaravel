@@ -1,4 +1,4 @@
-Projeto PortalCursos
+## Projeto PortalCursos
 
 ## Requisitos
 
@@ -6,6 +6,45 @@ Projeto PortalCursos
 * Composer - Conferir a instalação: composer --version
 * Node.js 22 ou superior - Conferir a versão: node -v
 * GIT - Conferir se está instalado o GIT: git -v
+
+
+### Tecnologias
+```sh
+
+MVC
+
+Seeder
+
+ORM
+
+Blade
+
+Validação de formulário
+
+Capturando e Validando IDs Encriptados
+
+SqlServe
+
+PHP 8.2
+
+Rotas
+
+Refatoração de código
+
+Github
+
+Criando Query para paginação
+
+Lidando com Formularios
+
+Lidando com Listagem de dados
+
+CRUD - Create, update, Delete.
+
+LOG 
+
+
+ ```
 
 ## Como rodar o projeto baixado
 

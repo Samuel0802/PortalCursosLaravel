@@ -22,7 +22,7 @@
        <input type="text" name="name" id="name" placeholder="Nome" value="{{ old('name', $user->name) }}" @disabled(true)/><br><br>
 
         <label>Senha:</label>
-       <input type="text" name="password" id="password" placeholder="Nova Senha" /><br><br>
+       <input type="password" name="password" id="password" placeholder="Nova Senha" /><br><br>
 
        <button type="submit">Salvar</button>
 
