@@ -19,7 +19,7 @@ ORM
 
 Blade
 
-Validação de formulário
+FormRequest - Validação de formulário
 
 Capturando e Validando IDs Encriptados
 
@@ -42,6 +42,8 @@ Lidando com Listagem de dados
 CRUD - Create, update, Delete.
 
 LOG 
+
+Laravel Auditing 
 
 
  ```
