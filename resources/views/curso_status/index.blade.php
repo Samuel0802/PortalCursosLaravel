@@ -4,6 +4,7 @@
         <h2>Listar Status Cursos</h2>
 
         <x-alert-success />
+        <x-alert-error />
 
         <a href="{{ route('cursos_statuses.create') }}">Cadastrar Status do Curso</a>
         <br> <br> <br>

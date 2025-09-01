@@ -26,8 +26,8 @@ class UserSeeder extends Seeder
                 'email' => 'samuel@gmail.com',
                 'matricula' => 2174,
                 'password' => bcrypt('Samuel123'),
-                'created_at' => null,
-                'updated_at' => null,
+                'user_status_id' => 1,
+
             ]);
         }
 
@@ -41,8 +41,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('Wilson123'),
             'matricula' => 2175,
             'email' => 'wilson@gmail.com',
-            'created_at' => null,
-            'updated_at' => null
+
         ],
         );
 

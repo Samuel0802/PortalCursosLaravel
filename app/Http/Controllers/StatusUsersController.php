@@ -114,7 +114,7 @@ class StatusUsersController extends Controller
              Log::critical('Error ao deletar Status Users', [
                 'error' => $e->getMessage()
              ]);
-            return redirect()->route('status_users.index')->with('error', 'Status Users Excluido com Sucesso');
+            return redirect()->route('status_users.index')->with('error', 'Error ao Excluir o Status do Users Pois está sendo Utilizado');
     }
 
    }

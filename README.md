@@ -45,6 +45,8 @@ LOG
 
 Laravel Auditing 
 
+Relacionamento ao banco de dados
+
 
  ```
 
@@ -91,3 +93,9 @@ Acessar a página criada com Laravel.
 http://127.0.0.1:8000
 ```
 
+### Se tiver usando BD SqlServe
+
+Usar esse comando na sua query para todas as tabelas
+
+ALTER TABLE cursos ALTER COLUMN created_at datetime2(0) NULL;
+ALTER TABLE cursos ALTER COLUMN updated_at datetime2(0) NULL;

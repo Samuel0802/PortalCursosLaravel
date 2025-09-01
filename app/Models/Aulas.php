@@ -12,6 +12,8 @@ class Aulas extends Model implements Auditable
 
     protected $table = 'aulas';
 
+
+
     protected $fillable = [
       'name',
     ];

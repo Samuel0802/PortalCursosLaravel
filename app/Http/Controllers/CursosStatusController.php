@@ -125,7 +125,7 @@ class CursosStatusController extends Controller
             'error' => $e->getMessage()
             ]);
 
-            return redirect()->route('cursos_statuses.index')->with('error', 'Error ao Excluir o Status do Curso');
+            return redirect()->route('cursos_statuses.index')->with('error', 'Error ao Excluir o Status do Curso Pois está sendo Utilizado');
         }
     }
 }

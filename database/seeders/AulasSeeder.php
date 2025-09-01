@@ -13,27 +13,18 @@ class AulasSeeder extends Seeder
     {
         // Se não encontrar o registro com o nome, cadastra o registro no BD
         Aulas::firstOrCreate(
-            [
-                'name' => 'Apresentação do Curso',
-                'created_at' => null,
-                'updated_at' => null,
-            ]
+            ['name' => 'Apresentação do Curso'],
+            // ['id' => 1, 'name' => 'Apresentação do Curso'],
         );
 
         Aulas::firstOrCreate(
-            [
-              'name' => 'Preparar o Ambiente de Desenvolvimento',
-                'created_at' => null,
-                'updated_at' => null
-            ]
-            );
+            ['name' => 'Preparar o Ambiente de Desenvolvimento'],
+            // ['id' => 2, 'name' => 'Preparar o Ambiente de Desenvolvimento'],
+        );
 
-         Aulas::firstOrCreate(
-            [
-                'name' => 'Criar a base do projeto',
-                'created_at' => null,
-                'updated_at' => null
-            ]
-         );
+        Aulas::firstOrCreate(
+            ['name' => 'Criar a Base do Projeto'],
+            // ['id' => 3, 'name' => 'Criar a Base do Projeto'],
+        );
     }
 }

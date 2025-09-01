@@ -12,12 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-     //Seeds que deve rodar em produção
+        //Seeds que deve rodar em produção
         if (App::environment('production')) {
             $this->call([
-                UserSeeder::class,
                 StatusUsersSeeder::class,
                 CursosStatusSeeder::class,
+                UserSeeder::class,
             ]);
         }
 

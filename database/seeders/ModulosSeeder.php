@@ -13,27 +13,16 @@ class ModulosSeeder extends Seeder
     {
         // Se não encontrar o registro com o nome, cadastra o registro no BD
         Modulos::firstOrCreate(
-            [
-                'name' => 'Introdução ao PHP',
-                'created_at' => null,
-                'updated_at' => null,
-            ]
+               ['name' => 'Introdução ao Laravel', 'curso_grupos_id' => 8],
+
         );
 
         Modulos::firstOrCreate(
-            [
-                'name' => 'Criação de sistema com Laravel Basico',
-                'created_at' =>  null,
-                'updated_at' =>  null,
-            ]
+             ['name' => 'Criar Sistema de Login', 'curso_grupos_id' => 9],
         );
 
-        Modulos::firstOrCreate(
-            [
-                'name' => 'Criação de sistema com Laravel Avançado',
-                'created_at' =>  null,
-                'updated_at' =>  null,
-            ]
-        );
+        // Modulos::firstOrCreate(
+        //   ['name' => 'Integrar o Layout', 'id' => 3],
+        // );
     }
 }
