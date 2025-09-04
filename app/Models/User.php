@@ -23,6 +23,7 @@ class User extends Authenticatable  implements Auditable
      * @var list<string>
      */
     protected $fillable = [
+        'user_status_id',
         'name',
         'login',
         'email',

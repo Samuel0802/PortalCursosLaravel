@@ -17,21 +17,23 @@ class Cursos extends Model implements Auditable
 
 
     protected $fillable = [
-       'name'
+        'name',
+        'curso_status_id'
     ];
 
 
     //Criar relacionamento entre um para muitos
-    public function cursoGrupo(){
+    public function cursoGrupo()
+    {
         //hasMany é: um para muitos
         //1 curso -> muitos grupos
         return $this->hasMany(CursosGrupo::class);
     }
 
-    public function cursoStatus(){
+    public function cursoStatus()
+    {
         //belongsTo é o inverso: muitos para um
         //muitos curso -> 1 status
         return $this->belongsTo(CursosStatus::class);
-}
-
+    }
 }

@@ -17,6 +17,7 @@ class Aulas extends Model implements Auditable
 
     protected $fillable = [
       'name',
+      'modulos_id'
     ];
 
     //Relacionamento de um para muitos

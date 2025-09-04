@@ -15,6 +15,7 @@ class Modulos extends Model implements Auditable
 
     protected $fillable = [
         'name',
+        'curso_grupos_id'
     ];
 
     //Relacionamento de um para muitos

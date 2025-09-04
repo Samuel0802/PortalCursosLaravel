@@ -15,6 +15,7 @@ class CursosGrupo extends Model implements Auditable
 
     protected $fillable = [
         'name',
+        'curso_id'
     ];
 
    //Criar relacionamento entre um para muitos
