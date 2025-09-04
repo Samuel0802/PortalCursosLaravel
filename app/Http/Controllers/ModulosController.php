@@ -10,15 +10,18 @@ use Illuminate\Support\Facades\Log;
 
 class ModulosController extends Controller
 {
-    public function index(CursosGrupo $cursoGrupo)
+    public function index(CursosGrupo $grupo)
     {
 
         //listar os modulos cadastrados no banco de dados
-        $modulos = Modulos::orderBy('id', 'desc')->paginate(10);
+        $modulos = Modulos::orderBy('id', 'desc')
+        //condição que filtrar apenas os modulos que pertencem ao grupo específico
+         ->where('curso_grupos_id', $grupo->id)
+        ->paginate(10);
 
         Log::info('Listando Modulos');
 
-        return view('modulos.index', ['modulos' => $modulos, 'grupo' => $cursoGrupo]);
+        return view('modulos.index', ['modulos' => $modulos]);
     }
 
     public function show(Modulos $modulo)

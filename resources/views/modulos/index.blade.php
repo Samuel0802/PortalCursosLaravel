@@ -12,8 +12,9 @@
       <br> <br> <br>
 
       @foreach ($modulos as $modulo)
-       ID: {{ $modulo->id }}<br>
-       NOME: {{ $modulo->name }}<br>
+       Id: {{ $modulo->id }}<br>
+       Modulo: {{ $modulo->name }}<br>
+       <a href="{{ route('aulas.index', ['modulo' => $modulo->id]) }}">Aulas</a><br>
        <a href="{{ route('modulos.show', ['modulo' => $modulo->id]) }}">Visualizar</a><br>
         <a href="{{ route('modulos.edit', ['modulo' => $modulo->id]) }}">Editar</a><br>
 

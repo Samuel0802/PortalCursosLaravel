@@ -12,8 +12,9 @@
         <br>  <br>  <br>
 
         @foreach ($grupos as $grupo)
-            ID: {{ $grupo->id }}<br>
-            NOME: {{ $grupo->name }}<br>
+            Id: {{ $grupo->id }}<br>
+            Turma: {{ $grupo->name }}<br>
+            <a href="{{ route('modulos.index', ['grupo' => $grupo->id]) }}">Modulos</a><br>
             <a href="{{ route('cursos_grupo.show', ['grupo' => $grupo->id]) }}" >Visualizar</a><br>
             <a href="{{ route('cursos_grupo.edit', ['grupo' => $grupo->id]) }}" >Editar</a><br>
 

@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AulasRequest;
 use App\Models\Aulas;
+use App\Models\Modulos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class AulasController extends Controller
 {
-    public function index()
+    public function index(Modulos $modulo)
     {
         //Listar todas as aulas
-        $aulas = Aulas::orderBy('id', 'desc')->paginate(10);
+        $aulas = Aulas::orderBy('id', 'desc')
+         //condição que filtrar apenas as aulas que pertencem ao modulo específico
+        ->where('modulos_id', $modulo->id)
+        ->paginate(10);
+
 
         Log::info('Usuario listou as Aulas');
 

@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Log;
 
 class CursosGrupoController extends Controller
 {
+    //Listar Grupos de Cursos
     public function index(Cursos $curso)
     {
 
         //Listar Grupos de Cursos
         $grupos = CursosGrupo::orderBy('id', 'desc')
-        // //condição que filtrar apenas os grupos que pertencem ao curso específico
-        //  ->where('curso_id', $curso->id )
-        ->paginate(6);
+         //condição que filtrar apenas os grupos que pertencem ao curso específico
+         ->where('curso_id', $curso->id )
+         ->paginate(6);
 
         //Salvando Log Listando Cursos Modulos
         Log::info('Listando Cursos Grupo');

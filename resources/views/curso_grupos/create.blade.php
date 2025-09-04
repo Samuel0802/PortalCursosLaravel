@@ -4,7 +4,7 @@
 
 <div>
 
-    <h2>Cadastrar o Grupo do Curso</h2>
+    <h2>Cadastrar o Turma do Curso</h2>
 
 
     <x-alert-error/>
