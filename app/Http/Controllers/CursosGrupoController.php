@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CursosGruposRequest;
+use App\Models\Cursos;
 use App\Models\CursosGrupo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class CursosGrupoController extends Controller
 {
-    public function index()
+    public function index(Cursos $curso)
     {
 
         //Listar Grupos de Cursos
-        $grupos = CursosGrupo::orderBy('id', 'desc')->paginate(6);
+        $grupos = CursosGrupo::orderBy('id', 'desc')
+        // //condição que filtrar apenas os grupos que pertencem ao curso específico
+        //  ->where('curso_id', $curso->id )
+        ->paginate(6);
 
         //Salvando Log Listando Cursos Modulos
         Log::info('Listando Cursos Grupo');

@@ -14,4 +14,11 @@ class CursosStatus extends Model  implements Auditable
     protected $fillable = [
         'name',
     ];
+
+    //Criar relacionamento entre um para muitos
+    public function curso(){
+        //hasMany é: um para muitos
+        //1 status -> muitos cursos
+        return $this->hasMany(Cursos::class);
+    }
 }

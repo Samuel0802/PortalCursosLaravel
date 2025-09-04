@@ -14,6 +14,7 @@
 
        ID: {{ $modulo->id }}<br>
        NOME: {{ $modulo->name }}<br>
+       Turma: {{ $modulo->cursosGrupo?->name ?? 'Sem Turma' }}<br>
        Cadastro: {{ \Carbon\Carbon::parse($modulo->created_at)->format('d/m/Y H:i:s')}}<br>
        Atualizado: {{ \Carbon\Carbon::parse($modulo->updated_at)->format('d/m/Y H:i:s') }}<br>
 

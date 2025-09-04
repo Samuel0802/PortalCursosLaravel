@@ -16,6 +16,7 @@
 
             Id: {{ $cursos->id }}<br>
             Nome: {{ $cursos->name }}<br>
+            Status: {{ $cursos->cursoStatus?->name ?? 'Sem Status' }}<br>
             Cadastrado: {{ \Carbon\Carbon::parse($cursos->created_at)->format('d/m/Y H:i:s')}}<br>
             Atualizado: {{ \Carbon\Carbon::parse($cursos->updated_at)->format('d/m/Y H:i:s') }}<br>
 </div>

@@ -17,6 +17,7 @@
           LOGIN: {{ $user->login }}<br>
           EMAIL: {{ $user->email }}<br>
           MATRICULA: {{ $user->matricula }}<br>
+          STATUS: {{ $user->userStatus?->name ?? 'Sem status' }}<br>
           Cadastrado: {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }}<br>
           Atualizado: {{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y H:i:s') }}<br>
 

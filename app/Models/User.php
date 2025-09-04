@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\StatusUsers;
+
 
 class User extends Authenticatable  implements Auditable
 {
@@ -30,6 +32,7 @@ class User extends Authenticatable  implements Auditable
 
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -52,4 +55,15 @@ class User extends Authenticatable  implements Auditable
             'password' => 'hashed',
         ];
     }
+
+
+    //Relacionamento de um para muitos
+    public function userStatus(){
+        //belongsTo é o inverso: muitos para um
+        //muitos usuario -> 1 status
+        return  $this->belongsTo(StatusUsers::class);
+    }
+
+
+
 }

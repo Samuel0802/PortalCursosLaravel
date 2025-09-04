@@ -15,6 +15,7 @@
             Id: {{ $curso->id }}<br>
             Nome: {{ $curso->name }}<br>
 
+             <a href="{{ route('cursos_grupo.index', ['curso' => $curso->id]) }}">Turmas</a><br>
              <a href="{{ route('cursos.show', ['cursos' => $curso->id]) }}">Visualizar</a><br>
              <a href="{{ route('cursos.edit', ['cursos' => $curso->id]) }}">Editar</a><br>
 

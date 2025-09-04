@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
+
 class Aulas extends Model implements Auditable
 {
 
@@ -17,4 +18,11 @@ class Aulas extends Model implements Auditable
     protected $fillable = [
       'name',
     ];
+
+    //Relacionamento de um para muitos
+    public function modulos(){
+          //hasMany é: um para muitos
+        //1 modulo -> para muitas aulas
+        return  $this->belongsTo(Modulos::class);
+    }
 }

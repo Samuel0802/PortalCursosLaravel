@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
     <div>
-        <h2>Visualizar os Grupo Curso</h2>
+        <h2>Visualizar as Turma Curso</h2>
 
         <x-alert-success />
 
@@ -15,6 +15,7 @@
 
             ID: {{ $grupo->id }}<br>
             NOME: {{ $grupo->name }}<br>
+            CURSO: {{ $grupo->curso?->name ?? 'Sem Curso'}}<br>
             Cadastrado: {{ \Carbon\Carbon::parse($grupo->create_at)->format('d/m/Y H:i:s') }}<br>
             Atualizado: {{ \Carbon\Carbon::parse($grupo->update_at)->format('d/m/Y H:i:s') }}<br>
 

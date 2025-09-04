@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ModulosRequest;
 use App\Models\Modulos;
+use App\Models\CursosGrupo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ModulosController extends Controller
 {
-    public function index()
+    public function index(CursosGrupo $cursoGrupo)
     {
 
         //listar os modulos cadastrados no banco de dados
@@ -17,11 +18,13 @@ class ModulosController extends Controller
 
         Log::info('Listando Modulos');
 
-        return view('modulos.index', ['modulos' => $modulos]);
+        return view('modulos.index', ['modulos' => $modulos, 'grupo' => $cursoGrupo]);
     }
 
     public function show(Modulos $modulo)
     {
+        // força carregar a turma junto do model Modulos.php
+       $modulo->load('cursosGrupo');
 
         //Salvar Log de Detalhes de modulos
         Log::info('Visualizou o modulo do id', [
