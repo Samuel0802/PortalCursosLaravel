@@ -47,11 +47,11 @@ Route::prefix('status-users')->group(function () {
 Route::prefix('cursos')->group(function () {
     Route::get('/', [CursosController::class, 'index'])->name('cursos.index');
     Route::get('/create', [CursosController::class, 'create'])->name('cursos.create');
-    Route::get('/{cursos}', [CursosController::class, 'show'])->name('cursos.show');
+    Route::get('/{curso}', [CursosController::class, 'show'])->name('cursos.show');
     Route::post('/', [CursosController::class, 'store'])->name('cursos.store');
-    Route::get('/{cursos}/edit', [CursosController::class, 'edit'])->name('cursos.edit');
-    Route::put('/{cursos}', [CursosController::class, 'update'])->name('cursos.update');
-    Route::delete('/{cursos}', [CursosController::class, 'destroy'])->name('cursos.destroy');
+    Route::get('/{curso}/edit', [CursosController::class, 'edit'])->name('cursos.edit');
+    Route::put('/{curso}', [CursosController::class, 'update'])->name('cursos.update');
+    Route::delete('/{curso}', [CursosController::class, 'destroy'])->name('cursos.destroy');
 });
 
 //ROTA DE STATUS CURSOS
@@ -67,9 +67,9 @@ Route::prefix('cursos-status')->group(function () {
 
 //ROTA DE GRUPO CURSOS
 Route::prefix('cursos-grupos')->group(function () {
-    Route::get('/{curso}', [CursosGrupoController::class, 'index'])->name('cursos_grupo.index');
-    Route::get('/create', [CursosGrupoController::class, 'create'])->name('cursos_grupo.create');
-    Route::post('/', [CursosGrupoController::class, 'store'])->name('cursos_grupo.store');
+    Route::get('/cursos/{curso}', [CursosGrupoController::class, 'index'])->name('cursos_grupo.index');
+    Route::get('/create/{curso}', [CursosGrupoController::class, 'create'])->name('cursos_grupo.create');
+    Route::post('/{curso}', [CursosGrupoController::class, 'store'])->name('cursos_grupo.store');
     Route::get('/{grupo}', [CursosGrupoController::class, 'show'])->name('cursos_grupo.show');
     Route::get('/{grupo}/edit', [CursosGrupoController::class, 'edit'])->name('cursos_grupo.edit');
     Route::put('/{grupo}', [CursosGrupoController::class, 'update'])->name('cursos_grupo.update');
@@ -79,7 +79,7 @@ Route::prefix('cursos-grupos')->group(function () {
 
 //ROTA DE MODULOS
 Route::prefix('modulos')->group(function () {
-    Route::get('/{grupo}', [ModulosController::class, 'index'])->name('modulos.index');
+    Route::get('/', [ModulosController::class, 'index'])->name('modulos.index');
     Route::get('/create', [ModulosController::class, 'create'])->name('modulos.create');
     Route::post('/', [ModulosController::class, 'store'])->name('modulos.store');
     Route::get('/{modulo}', [ModulosController::class, 'show'])->name('modulos.show');
@@ -90,7 +90,7 @@ Route::prefix('modulos')->group(function () {
 
 //ROTA DE AULAS
 Route::prefix('aulas')->group(function () {
-    Route::get('/{modulo}', [AulasController::class, 'index'])->name('aulas.index');
+    Route::get('/', [AulasController::class, 'index'])->name('aulas.index');
     Route::get('/create', [AulasController::class, 'create'])->name('aulas.create');
     Route::get('/{aulas}', [AulasController::class, 'show'])->name('aulas.show');
     Route::post('/', [AulasController::class, 'store'])->name('aulas.store');

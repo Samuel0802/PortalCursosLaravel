@@ -43,7 +43,7 @@ class CursosController extends Controller
 
         try {
 
-            $curso = Cursos::create([
+            $cursos = Cursos::create([
                 'name' => $request->input('name'),
             ]);
 
@@ -51,12 +51,12 @@ class CursosController extends Controller
             Log::info(
                 'Usuario Cadastrou Curso',
                 [
-                    'curso_id' => $curso->id
+                    'curso_id' => $cursos->id
                 ]
             );
 
             //Redireciona o usuário, enviar a mensagem de sucesso
-            return redirect()->route('cursos.index')->with('success', 'Curso Cadastrado com sucesso');
+            return redirect()->route('cursos.show' , ['cursos' => $cursos])->with('success', 'Curso Cadastrado com sucesso');
         } catch (\Exception $e) {
 
             //Log de error ao cadastrar curso

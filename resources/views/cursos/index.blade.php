@@ -16,10 +16,10 @@
             Nome: {{ $curso->name }}<br>
 
              <a href="{{ route('cursos_grupo.index', ['curso' => $curso->id]) }}">Turmas</a><br>
-             <a href="{{ route('cursos.show', ['cursos' => $curso->id]) }}">Visualizar</a><br>
-             <a href="{{ route('cursos.edit', ['cursos' => $curso->id]) }}">Editar</a><br>
+             <a href="{{ route('cursos.show', ['curso' => $curso->id]) }}">Visualizar</a><br>
+             <a href="{{ route('cursos.edit', ['curso' => $curso->id]) }}">Editar</a><br>
 
-             <form action="{{ route('cursos.destroy', ['cursos' => $curso->id]) }}" method="POST">
+             <form action="{{ route('cursos.destroy', ['curso' => $curso->id]) }}" method="POST">
              @csrf
              @method('delete')
 

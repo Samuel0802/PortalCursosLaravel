@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class CursosGrupoController extends Controller
 {
-    //Listar Grupos de Cursos
+    //Listar Turmas de Cursos
     public function index(Cursos $curso)
     {
 
@@ -23,37 +23,39 @@ class CursosGrupoController extends Controller
         //Salvando Log Listando Cursos Modulos
         Log::info('Listando Cursos Grupo');
 
-        return view('curso_grupos.index', ['grupos' => $grupos]);
+        return view('curso_grupos.index', ['grupos' => $grupos, 'curso' => $curso]);
     }
 
-    public function create()
-    {
-        return view('curso_grupos.create');
-    }
-
+     //Detalhes Turmas de Cursos
     public function show(CursosGrupo $grupo)
     {
 
         return view('curso_grupos.show', ['grupo' => $grupo]);
     }
 
-    public function store(CursosGruposRequest $request)
+    //Carregar o formulário cadastrar nova turma
+    public function create(Cursos $curso)
+    {
+        return view('curso_grupos.create', ['curso' => $curso]);
+    }
+
+    public function store(Cursos $curso, CursosGruposRequest $request)
     {
         try {
 
             //Cadastrar no banco de dados na tabela cursos grupo
-           $CursosModulos = CursosGrupo::create([
+           $grupo = CursosGrupo::create([
                 'name' => $request->input('name'),
-                'created_at' => now(),
-                'updated_at' => now(),
+                //pega o ID do curso que veio pela rota,o grupo pertence a um curso específico
+                'curso_id' => $curso->id,
             ]);
 
              //Salvando Log Cadastrando Cursos Modulos
             Log::info('Cadastrado Cursos Modulos', [
-                'CursosModulos_id' => $CursosModulos->id
+                'CursosModulos_id' => $grupo->id
             ]);
 
-            return redirect()->route('cursos_grupo.index')->with('success', 'Curso Grupo Cadastrado com Sucesso!');
+            return redirect()->route('cursos_grupo.show', ['grupo' => $grupo->id])->with('success', 'Curso Grupo Cadastrado com Sucesso!');
         } catch (\Exception $e) {
 
              Log::error('Cadastrado Cursos Modulos', [
