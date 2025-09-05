@@ -66,9 +66,10 @@ class ModulosController extends Controller
                 'modulo_id' => $e->getMessage(),
              ] );
 
-            return redirect()->route('modulos.create')->with('error', 'Erro ao Cadastrar Modulos');
-        }
+           return back()->withInput()->with('error', 'Erro ao Cadastrar Modulos');
     }
+}
+
 
     public function edit(Modulos $modulo)
     {
@@ -105,7 +106,7 @@ class ModulosController extends Controller
                 'modulo_id' => $e->getMessage(),
              ] );
 
-            return redirect()->route('modulos.show', ['modulo' => $modulo])->with('error', 'Error ao Atualizar o Modulo');
+         return back()->withInput()->with('error', 'Error ao Atualizar o Modulo');
         }
     }
 
@@ -127,7 +128,7 @@ class ModulosController extends Controller
                 'modulo_id' => $e->getMessage(),
              ] );
 
-            return redirect()->route('modulos.index')->with('error', 'Error ao Excluir o Modulo');
+            return back()->withInput()->with('error', 'Error ao Excluir o Modulo');
          }
 
     }

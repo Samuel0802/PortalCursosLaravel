@@ -64,7 +64,7 @@ class AulasController extends Controller
             );
 
             //erro!
-            return redirect()->route('aulas.create')->with('error', 'Erro ao Cadastrar a Aula');
+          return back()->withInput()->with('error', 'Erro ao Cadastrar a Aula');
         }
     }
 
@@ -101,6 +101,7 @@ class AulasController extends Controller
 
 
             return redirect()->route('aulas.show', ['aulas' => $aulas])->with('success', 'Aula Atualizada com Sucesso');
+
         } catch (\Exception $e) {
 
                Log::info(
@@ -110,7 +111,7 @@ class AulasController extends Controller
                 ]
             );
 
-            return redirect()->route('aulas.show', ['aulas' => $aulas])->with('error', 'Error ao Atualizar a Aula');
+          return back()->withInput()->with('error', 'Error ao Atualizar a Aula');
         }
     }
 
@@ -137,7 +138,8 @@ class AulasController extends Controller
                 ]
             );
 
-            return redirect()->route('aulas.index')->with('success', 'Aula Excluida com Sucesso');
+          //error
+          return back()->withInput()->with('error', 'Aula Excluida com Sucesso');
         }
     }
 }

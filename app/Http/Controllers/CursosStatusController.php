@@ -38,15 +38,15 @@ class CursosStatusController extends Controller
 
         //Criando no Status do curso
         try {
-          $cursoStatus =  CursosStatus::create([
+            $cursoStatus =  CursosStatus::create([
                 'name' => $request->input('name'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
-           Log::info('Cadastrado Curso Status', [
-            'CursoStatus' => $cursoStatus->id
-           ]);
+            Log::info('Cadastrado Curso Status', [
+                'CursoStatus' => $cursoStatus->id
+            ]);
 
             //Redireciona o usuário, enviar a mensagem de sucesso
             return redirect()->route('cursos_statuses.index')->with('success', 'Status do curso Cadastrado com Sucesso');
@@ -54,11 +54,11 @@ class CursosStatusController extends Controller
 
 
             Log::error('Error ao Cadastrado Curso Status', [
-            'CursoStatus' => $e->getMessage()
-           ]);
+                'CursoStatus' => $e->getMessage()
+            ]);
 
             //Redireciona o usuario, caso houver erro ao cadastrar o status do curso
-            return redirect()->route('cursos_statuses.create')->with('error', 'Erro ao cadastrar o status do curso');
+            return back()->withInput()->with('error', 'Erro ao cadastrar o status do curso');
         }
     }
 
@@ -75,31 +75,37 @@ class CursosStatusController extends Controller
                 'name' => $request->input('name'),
             ]);
 
-               //verifica se o campo existe na requisição e não é nulo.
-            if($request->has('name')){
-                Log::notice('Usuario alterando Cursos Status',
-                [
-                    'cursosStatus_id' => $cursosstatus->id,
+            //verifica se o campo existe na requisição e não é nulo.
+            if ($request->has('name')) {
+                Log::notice(
+                    'Usuario alterando Cursos Status',
+                    [
+                        'cursosStatus_id' => $cursosstatus->id,
 
-                ]);
+                    ]
+                );
             }
 
             //Salvar log Update
-            Log::info('Update Cursos Status Realizado',
-            [
-            'CursosStatus_id' => $cursosstatus->id
-            ]);
+            Log::info(
+                'Update Cursos Status Realizado',
+                [
+                    'CursosStatus_id' => $cursosstatus->id
+                ]
+            );
 
             return redirect()->route('cursos_statuses.show', ['cursosstatus' => $cursosstatus])->with('success', 'Status do Curso Atualizado com Sucesso');
         } catch (\Exception $e) {
 
-               //Error Salvar log Update
-            Log::error('Update Cursos Status Realizado',
-            [
-            'CursosStatus_id' => $e->getMessage()
-            ]);
+            //Error Salvar log Update
+            Log::error(
+                'Update Cursos Status Realizado',
+                [
+                    'CursosStatus_id' => $e->getMessage()
+                ]
+            );
 
-            return redirect()->route('cursos.edit', ['cursosstatus' => $cursosstatus])->with('error', 'Erro ao Atualizar o Status do Curso');
+            return back()->withInput()->with('error', 'Erro ao Atualizar o Status do Curso');
         }
     }
 
@@ -110,22 +116,26 @@ class CursosStatusController extends Controller
         try {
             $cursosstatus->delete();
 
-               //Salvar log Delete
-            Log::info('Delete Cursos Status Realizado',
-            [
-            'CursosStatus_id' => $cursosstatus->id
-            ]);
+            //Salvar log Delete
+            Log::info(
+                'Delete Cursos Status Realizado',
+                [
+                    'CursosStatus_id' => $cursosstatus->id
+                ]
+            );
 
             return redirect()->route('cursos_statuses.index')->with('success', 'Status do Curso Excluido com Sucesso');
         } catch (\Exception $e) {
 
-                //Salvar log Delete
-            Log::critical('Error ao deletar Cursos Status',
-            [
-            'error' => $e->getMessage()
-            ]);
+            //Salvar log Delete
+            Log::critical(
+                'Error ao deletar Cursos Status',
+                [
+                    'error' => $e->getMessage()
+                ]
+            );
 
-            return redirect()->route('cursos_statuses.index')->with('error', 'Error ao Excluir o Status do Curso Pois está sendo Utilizado');
+            return back()->withInput()->with('error', 'Error ao Excluir o Status do Curso Pois está sendo Utilizado');
         }
     }
 }

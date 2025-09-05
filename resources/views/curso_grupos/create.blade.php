@@ -10,7 +10,7 @@
     <x-alert-error/>
 
 
-    <form action="{{ route('cursos_grupo.store') }}" method="post">
+    <form action="{{ route('cursos_grupo.store', ['curso' => $curso->id]) }}" method="post">
        @csrf
        @method('POST')
 

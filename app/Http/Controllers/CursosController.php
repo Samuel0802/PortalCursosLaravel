@@ -56,7 +56,7 @@ class CursosController extends Controller
             );
 
             //Redireciona o usuário, enviar a mensagem de sucesso
-            return redirect()->route('cursos.show' , ['cursos' => $cursos])->with('success', 'Curso Cadastrado com sucesso');
+            return redirect()->route('cursos.show' , ['cursos' => $cursos->id])->with('success', 'Curso Cadastrado com sucesso');
         } catch (\Exception $e) {
 
             //Log de error ao cadastrar curso
