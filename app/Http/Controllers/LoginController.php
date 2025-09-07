@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -18,24 +19,28 @@ class LoginController extends Controller
     public function loginProcess(LoginRequest $request)
     {
 
-        // dd($request);
+        //  dd($request);
         //Capturar possíveis exceções durante a execução
         try {
-               //Validar o login e a senha com as informações do banco de dados
-             $authenticado = Auth::attempt([
-                   'login' => $request->login,
-                   'password' => $request->password,
-               ]);
+            //Validar o login e a senha com as informações do banco de dados
+            $authenticado = Auth::attempt([
+                'login' => $request->login,
+                'password' => $request->password,
+            ]);
 
-               //Verificar se o usuario foi autenticado
-               //se for false
-               if(!$authenticado){
-                  Log::notice('Dados do login incorreto!', ['login' => $request->login]);
+            //Verificar se o usuario foi autenticado
+            //se for false
+            if (!$authenticado) {
+                Log::notice('Dados do login incorreto!', ['login' => $request->login]);
 
                 return back()->withInput()->with('error', 'Login ou Senha incorretos');
-               }
+            }
 
-               return redirect()->route('dashboard.index')->with('success', 'Login realizado com sucesso!');
+            //Salvar Log
+            Log::info('Login', ['action_user_id' => Auth::id()]);
+
+            return redirect()->route('dashboard.index')->with('success', 'Login realizado com sucesso!');
+
 
         } catch (\Exception $e) {
 
@@ -43,10 +48,22 @@ class LoginController extends Controller
 
             return back()->withInput()->with('error', 'Login ou Senha incorretos');
         }
+    }
 
+    //deslogar o usuário
+    public function logout(Request $request)
+    {
+        //salvar log
+        Log::notice('User deslogou', ['action_user_id' => Auth::id()]);
 
+        //deslogar o usuário
+        Auth::logout();
 
+       // Encerra completamente a sessão atual do usuário
+        $request->session()->invalidate();
+        // //Gera um novo token CSRF para a sessão
+        $request->session()->regenerateToken();
 
-
+        return redirect()->route('login')->with('success', 'Logout realizado com sucesso!');
     }
 }

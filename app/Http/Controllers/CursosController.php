@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CursosRequest;
 use App\Models\Cursos;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class CursosController extends Controller
@@ -17,7 +18,7 @@ class CursosController extends Controller
         //    dd($cursos);
 
         //Salvar log de listagem
-        Log::info('Usuario Listou os Cursos');
+        Log::info('Usuario Listou os Cursos',  ['action_user_id' => Auth::id()]);
 
         return view('cursos.index', ['cursos' => $cursos]);
     }
@@ -25,6 +26,9 @@ class CursosController extends Controller
     //Visualizar Cursos
     public function show(Cursos $curso)
     {
+
+        //Salvar log de visualização
+        Log::info('Usuario visualizou detalhes do curso',  ['action_user_id' => Auth::id()]);
 
         //carregar uma view
         return view('cursos.show', ['curso' =>  $curso]);
