@@ -1,3 +1,7 @@
+
+@extends('layouts.admin')
+@section('content')
+
 <div>
 
     <h2>Cadastrar as Aulas</h2>
@@ -15,3 +19,5 @@
 
     </form>
 </div>
+
+@endsection

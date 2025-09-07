@@ -8,9 +8,21 @@ use App\Http\Controllers\ModulosController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\StatusUsersController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+
+//PAGINA INICIAL
 Route::get('/', [MainController::class, 'index'])->name('home');
+
+//LOGIN
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+//PROCESSAR OS DADOS DO LOGIN
+Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.process');
+
+//PAGINA INICIAL DO ADMINISTRATIVO
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 //ROTA DE USUARIOS
 Route::prefix('users')->group(function () {

@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.site')
  @section('content')
 
     <h1>Bem vindo ao Portal de Cursos</h1>

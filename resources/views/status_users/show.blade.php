@@ -1,5 +1,7 @@
-@extends('layouts.layout')
+@extends('layouts.admin')
 @section('content')
+
+
     <div>
         <h2>Visualizar Status Users</h2>
 

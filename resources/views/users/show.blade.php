@@ -1,5 +1,5 @@
-@extends('layouts.layout')
- @section('content')
+@extends('layouts.admin')
+@section('content')
 
 <div>
     <h2>Listar Users</h2>

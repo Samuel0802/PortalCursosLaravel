@@ -1,3 +1,7 @@
+@extends('layouts.admin')
+
+@section('content')
+
 <div>
 
     <h2>Editar as Aulas</h2>
@@ -18,3 +22,5 @@
 
     </form>
 </div>
+
+@endsection

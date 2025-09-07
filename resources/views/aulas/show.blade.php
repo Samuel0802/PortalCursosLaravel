@@ -1,3 +1,6 @@
+@extends('layouts.admin')
+@section('content')
+
 <div>
     <h2>Detalhes das Aulas</h2>
 
@@ -28,3 +31,6 @@
 
 
 </div>
+
+
+@endsection

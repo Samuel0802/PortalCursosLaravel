@@ -1,3 +1,6 @@
+@extends('layouts.admin')
+@section('content')
+
 <div>
     <h2>Listar as Aulas</h2>
 
@@ -33,3 +36,5 @@
 
       {{ $aulas->links() }}
 </div>
+
+@endsection

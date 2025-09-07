@@ -1,5 +1,6 @@
-@extends('layouts.layout')
+@extends('layouts.admin')
 @section('content')
+
     <div>
         <h2>Detalhes das Turma Curso</h2>
 
