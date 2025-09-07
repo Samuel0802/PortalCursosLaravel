@@ -21,7 +21,7 @@ class ModulosController extends Controller
 
         Log::info('Listando Modulos');
 
-        return view('modulos.index', ['modulos' => $modulos]);
+        return view('modulos.index', ['modulos' => $modulos, 'grupo' => $grupo]);
     }
 
     public function show(Modulos $modulo)
@@ -37,17 +37,19 @@ class ModulosController extends Controller
         return view('modulos.show', ['modulo' => $modulo]);
     }
 
-    public function create()
+    public function create(CursosGrupo $grupo)
     {
-        return view('modulos.create');
+        return view('modulos.create', ['grupo' => $grupo]);
     }
 
-    public function store(ModulosRequest $request)
+    public function store(ModulosRequest $request, CursosGrupo $grupo)
     {
 
         try {
            $modulo = Modulos::create([
                 'name' => $request->input('name'),
+            //pega o ID do grupo que veio pela rota,o modulo pertence a um grupo específico
+                'curso_grupos_id' => $grupo->id,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
@@ -58,7 +60,7 @@ class ModulosController extends Controller
              ] );
 
 
-            return redirect()->route('modulos.index')->with('success', 'Modulo Cadastado com Sucesso');
+            return redirect()->route('modulos.index' , ['grupo' => $grupo->id])->with('success', 'Modulo Cadastado com Sucesso');
         } catch (\Exception $e) {
 
             //  Salvar log de error criação de modulos
@@ -97,7 +99,7 @@ class ModulosController extends Controller
                 'modulo_id' => $modulo->id,
              ] );
 
-            return redirect()->route('modulos.show', ['modulo' => $modulo])->with('success', 'Modulo Atualizado com Sucesso');
+            return redirect()->route('modulos.show', ['modulo' => $modulo->id])->with('success', 'Modulo Atualizado com Sucesso');
 
         } catch (\Exception $e) {
 

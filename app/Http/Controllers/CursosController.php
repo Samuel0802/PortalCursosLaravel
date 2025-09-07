@@ -23,11 +23,11 @@ class CursosController extends Controller
     }
 
     //Visualizar Cursos
-    public function show(Cursos $cursos)
+    public function show(Cursos $curso)
     {
 
         //carregar uma view
-        return view('cursos.show', ['cursos' =>  $cursos]);
+        return view('cursos.show', ['curso' =>  $curso]);
     }
 
     //Carregar o formulário cadastrar novo curso
@@ -43,7 +43,7 @@ class CursosController extends Controller
 
         try {
 
-            $cursos = Cursos::create([
+            $curso = Cursos::create([
                 'name' => $request->input('name'),
             ]);
 
@@ -51,12 +51,12 @@ class CursosController extends Controller
             Log::info(
                 'Usuario Cadastrou Curso',
                 [
-                    'curso_id' => $cursos->id
+                    'curso_id' => $curso->id
                 ]
             );
 
             //Redireciona o usuário, enviar a mensagem de sucesso
-            return redirect()->route('cursos.show' , ['cursos' => $cursos->id])->with('success', 'Curso Cadastrado com sucesso');
+            return redirect()->route('cursos.show' , ['curso' => $curso->id])->with('success', 'Curso Cadastrado com sucesso');
         } catch (\Exception $e) {
 
             //Log de error ao cadastrar curso
@@ -68,24 +68,25 @@ class CursosController extends Controller
             );
 
             //Redireciona o usuario, caso houver erro ao cadastrar o curso
-            return redirect()->route('cursos.create')->with('error', 'Erro ao cadastrar o curso');
+
+            return back()->withInput()->with('error', 'Erro ao cadastrar o curso');
         }
     }
 
     //Carregar o formulário editar Cursos
-    public function edit(Cursos $cursos)
+    public function edit(Cursos $curso)
     {
 
-        return view('cursos.edit', ['cursos' => $cursos]);
+        return view('cursos.edit', ['curso' => $curso]);
     }
 
     //Função de update de cursos
-    public function update(CursosRequest $request, Cursos $cursos)
+    public function update(CursosRequest $request, Cursos $curso)
     {
 
         try {
 
-            $cursos->update([
+            $curso->update([
                 'name' => $request->input('name')
             ]);
 
@@ -94,7 +95,7 @@ class CursosController extends Controller
                 Log::notice(
                     'Usuario alterou nome do Curso',
                     [
-                        'cursos_id' => $cursos->id
+                        'cursos_id' => $curso->id
                     ]
                 );
             }
@@ -103,11 +104,11 @@ class CursosController extends Controller
             Log::info(
                 'Usuario alterou com sucesso',
                 [
-                    'cursos' => $cursos->id
+                    'curso' => $curso->id
                 ]
             );
 
-            return redirect()->route('cursos.show', ['cursos' => $cursos])->with('success', 'Curso Atualizado com Sucesso');
+            return redirect()->route('cursos.show', ['curso' => $curso])->with('success', 'Curso Atualizado com Sucesso');
         } catch (\Exception $e) {
 
             //Salvar log de error update
@@ -118,22 +119,22 @@ class CursosController extends Controller
                 ]
             );
 
-            return redirect()->route('cursos.show', ['cursos' => $cursos])->with('error', 'Erro ao Atualizar o Curso');
+         return back()->withInput()->with('error', 'Erro ao Atualizar o Curso');
         }
     }
 
     //Excluir o curso do banco
-    public function destroy(Cursos $cursos)
+    public function destroy(Cursos $curso)
     {
 
         try {
-            $cursos->delete();
+            $curso->delete();
 
             //Salvando log de delete
             Log::info(
                 'Usuario deletou Cursos',
                 [
-                    'cursos_id' => $cursos->id,
+                    'cursos_id' => $curso->id,
                 ]
             );
 
@@ -148,7 +149,7 @@ class CursosController extends Controller
                 ]
             );
 
-            return redirect()->route('cursos.index')->with('error', 'Erro ao Excluir o Curso');
+            return back()->withInput()->with('error', 'Error ao Excluir o Curso');
         }
     }
 }

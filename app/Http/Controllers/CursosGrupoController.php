@@ -101,7 +101,7 @@ class CursosGrupoController extends Controller
                 ]
             );
 
-            return redirect()->route('cursos_grupo.show', ['grupo' => $grupo])->with('success', 'Curso Grupo Atualizado com Successo');
+            return redirect()->route('cursos_grupo.show', ['grupo' => $grupo->id])->with('success', 'Curso Grupo Atualizado com Successo');
         } catch (\Exception $e) {
 
             //Log de confirmação

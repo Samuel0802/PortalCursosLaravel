@@ -1,13 +1,21 @@
 <div>
-    <h2>Listar as Aulas</h2>
+    <h2>Detalhes das Aulas</h2>
 
     <x-alert-success />
 
-    <a href="{{ route('aulas.index') }}">Listar Aulas</a><br>
-    <a href="{{ route('aulas.edit', ['aulas' => $aula->id]) }}">Editar Aulas</a>
+    <a href="{{ route('aulas.index', ['modulo' => $aula->modulos_id]) }}">Listar Aulas</a><br>
+    <a href="{{ route('aulas.edit', ['aula' => $aula->id]) }}">Editar Aulas</a><br>
+
+           <form action="{{ route('aulas.destroy', ['aula' => $aula->id]) }}" method="POST">
+            @csrf
+            @method('delete')
+
+            <button type="submit" onclick="return confirm('Deseja realmente excluir?')"> Excluir</button>
+
+           </form>
 
     <br><br><br>
-
+      <hr>
 
     Id: {{ $aula->id }}<br>
     Nome: {{ $aula->name }}<br>

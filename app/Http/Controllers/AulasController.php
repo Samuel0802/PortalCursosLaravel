@@ -21,27 +21,28 @@ class AulasController extends Controller
 
         Log::info('Usuario listou as Aulas');
 
-        return view('aulas.index', ['aulas' =>  $aulas]);
+        return view('aulas.index', ['aulas' =>  $aulas, 'modulo' => $modulo]);
     }
 
     //Visualizar aulas
-    public function show(Aulas $aulas)
+    public function show(Aulas $aula)
     {
 
-        return view('aulas.show', ['aula' => $aulas]);
+        return view('aulas.show', ['aula' => $aula]);
     }
 
-    public function create()
+    public function create(Modulos $modulo)
     {
-        return view('aulas.create');
+        return view('aulas.create', ['modulo' => $modulo]);
     }
 
-    public function store(AulasRequest $request)
+    public function store(AulasRequest $request, Modulos $modulo)
     {
 
         try {
             $aula = Aulas::create([
                 'name' => $request->input('name'),
+                'modulos_id' => $modulo->id,
 
             ]);
 
@@ -53,7 +54,8 @@ class AulasController extends Controller
             );
 
             //successo ?
-            return redirect()->route('aulas.index')->with('success', 'Aula Cadastrada com Sucesso!');
+            return redirect()->route('aulas.index', ['modulo' => $modulo->id])->with('success', 'Aula Cadastrada com Sucesso!');
+
         } catch (\Exception $e) {
 
             Log::info(
@@ -68,16 +70,16 @@ class AulasController extends Controller
         }
     }
 
-    public function edit(Aulas $aulas)
+    public function edit(Aulas $aula)
     {
 
-        return view('aulas.edit', ['aulas' => $aulas]);
+        return view('aulas.edit', ['aula' => $aula]);
     }
 
-    public function update(AulasRequest $request, Aulas $aulas)
+    public function update(AulasRequest $request, Aulas $aula)
     {
         try {
-            $aulas->update([
+            $aula->update([
                 'name' => $request->input('name')
             ]);
 
@@ -86,7 +88,7 @@ class AulasController extends Controller
                 Log::notice(
                     "Usuario alterou Aula",
                     [
-                        'aulas' => $aulas->id,
+                        'aula' => $aula->id,
                     ]
                 );
             }
@@ -94,13 +96,13 @@ class AulasController extends Controller
             Log::info(
                 'Alterou aula com Sucesso',
                 [
-                    'aulas' => $aulas->id,
+                    'aulas' => $aula->id,
                 ]
             );
 
 
 
-            return redirect()->route('aulas.show', ['aulas' => $aulas])->with('success', 'Aula Atualizada com Sucesso');
+            return redirect()->route('aulas.show', ['aula' => $aula])->with('success', 'Aula Atualizada com Sucesso');
 
         } catch (\Exception $e) {
 
@@ -115,20 +117,20 @@ class AulasController extends Controller
         }
     }
 
-    public function destroy(Aulas $aulas)
+    public function destroy(Aulas $aula)
     {
 
         try {
-            $aulas->delete();
+            $aula->delete();
 
                  Log::info(
                 'Usuario deletou aula',
                 [
-                    'aula' => $aulas->id,
+                    'aula' => $aula->id,
                 ]
             );
 
-            return redirect()->route('aulas.index')->with('success', 'Aula Excluida com Sucesso');
+            return redirect()->route('aulas.index', )->with('success', 'Aula Excluida com Sucesso');
         } catch (\Exception $e) {
 
                  Log::critical(

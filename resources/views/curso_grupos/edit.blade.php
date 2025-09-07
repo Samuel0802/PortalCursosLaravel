@@ -2,10 +2,10 @@
 @section('content')
     <div>
 
-        <h2>Editar Grupo do Curso</h2>
+        <h2>Editar Turma do Curso</h2>
 
         <br> <br>
-        <a href="{{ route('cursos_grupo.index') }}">Listar</a><br>
+        <a href="{{ route('cursos_grupo.index', ['curso' => $grupo->curso_id]) }}">Listar</a><br>
         <a href="{{ route('cursos_grupo.show', ['grupo' => $grupo->id]) }}">Visualizar</a><br><br>
 
 

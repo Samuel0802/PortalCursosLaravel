@@ -3,7 +3,8 @@
 
     <x-alert-success/>
 
-      <a href="{{ route('aulas.create') }}">Cadastrar Aulas</a>
+     <a href="{{ route('modulos.index', ['grupo' => $modulo->curso_grupos_id]) }}">Listar Modulos</a><br>
+      <a href="{{ route('aulas.create', ['modulo' => $modulo->id]) }}">Cadastrar Aulas</a>
 
  <br><br><br>
 
@@ -11,10 +12,10 @@
          Id: {{ $aula->id }}<br>
          Nome: {{ $aula->name }}<br>
 
-         <a href="{{ route('aulas.show' , ['aulas' => $aula->id]) }}"> Visualizar</a><br>
-          <a href="{{ route('aulas.edit' , ['aulas' => $aula->id]) }}"> Editar</a><br>
+         <a href="{{ route('aulas.show' , ['aula' => $aula->id]) }}"> Visualizar</a><br>
+          <a href="{{ route('aulas.edit' , ['aula' => $aula->id]) }}"> Editar</a><br>
 
-           <form action="{{ route('aulas.destroy', ['aulas' => $aula->id]) }}" method="POST">
+           <form action="{{ route('aulas.destroy', ['aula' => $aula->id]) }}" method="POST">
             @csrf
             @method('delete')
 
@@ -26,7 +27,7 @@
 
       @empty
 
-        <p>Sem registros de Aulas</p>
+        <p style="color: red">Sem registros de Aulas</p>
 
       @endforelse
 

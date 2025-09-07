@@ -1,13 +1,14 @@
 @extends('layouts.layout')
 @section('content')
     <div>
-        <h2>Visualizar as Turma Curso</h2>
+        <h2>Detalhes das Turma Curso</h2>
 
         <x-alert-success />
 
         <br>
 
-        <a href="{{ route('cursos_grupo.index') }}">Listar </a><br>
+        <a href="{{ route('cursos_grupo.index', ['curso' => $grupo->curso_id]) }}">Listar </a><br>
+        <a href="{{ route('modulos.index', ['grupo' => $grupo->id]) }}">Listar modulos </a><br>
         <a href="{{ route('cursos_grupo.edit', ['grupo' => $grupo->id]) }}">Editar</a><br>
 
         <br>  <br>  <br>

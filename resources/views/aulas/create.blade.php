@@ -4,7 +4,7 @@
 
     <x-alert-error/>
 
-    <form action="{{ route('aulas.store') }}" method="post">
+    <form action="{{ route('aulas.store', ['modulo' => $modulo->id]) }}" method="post">
        @csrf
        @method('POST')
 

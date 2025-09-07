@@ -8,7 +8,7 @@
 
     <x-alert-error/>
 
-    <form action="{{ route('modulos.store') }}" method="post">
+    <form action="{{ route('modulos.store', ['grupo' => $grupo->id]) }}" method="post">
        @csrf
        @method('POST')
 
