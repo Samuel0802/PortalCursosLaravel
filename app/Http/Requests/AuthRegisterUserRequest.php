@@ -4,9 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class AuthRegisterUserRequest extends FormRequest
 {
-
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
@@ -14,19 +16,14 @@ class UserRequest extends FormRequest
 
     public function rules(): array
     {
-        // pega o usuário da rota (se existir)
-        $user = $this->route('user');
+
 
         //Regra da validação do formulário Users
         return [
             'name' => 'required',
-            // login obrigatório e único (ignora o ID do usuário atual se for edição)
-            'login' => 'required|unique:users,login,' . ($user ? $user->id : null),
-            // email obrigatório e único (mesmo esquema acima)
-            'email' => 'required|email|unique:users,email,' . ($user ? $user->id : null),
-            'matricula' => 'required_if:matricula,!=null|unique:users,matricula',
-            // senha: só obrigatória se vier no request, e precisa de pelo menos 6 caracteres
-            'password' => 'required_if:password,!=null|min:6|confirmed'
+            'login' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6'
 
         ];
     }
@@ -41,11 +38,9 @@ class UserRequest extends FormRequest
             'email.required' => 'Campo Email é Obrigatório',
             'email.unique' => 'Email já cadastrado',
             'email.email' => 'Necessário um Email válido',
-            'matricula.required' => 'Campo Matricula é Obrigátorio',
-            'matricula.unique' => 'Matricula já Cadastrado!',
             'password.required' => 'Campo Senha é Obrigatório!',
             'password.confirmed' => 'A Confirmação de Senha Não corresponde!',
-            'password.min' => 'Senha com Minimo :min Caracteres!'
+            'password.min' => 'Senha com Minimo :min Caracteres!',
 
         ];
     }

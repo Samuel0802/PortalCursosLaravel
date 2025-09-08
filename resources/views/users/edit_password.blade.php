@@ -21,8 +21,11 @@
        <label>Nome:</label>
        <input type="text" name="name" id="name" placeholder="Nome" value="{{ old('name', $user->name) }}" @disabled(true)/><br><br>
 
-        <label>Senha:</label>
+        <label>Nova Senha:</label>
        <input type="password" name="password" id="password" placeholder="Nova Senha" /><br><br>
+
+         <label>Confirmar Senha:</label>
+       <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirme Nova Senha" /><br><br>
 
        <button type="submit">Salvar</button>
 

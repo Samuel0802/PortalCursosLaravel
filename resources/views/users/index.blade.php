@@ -6,7 +6,7 @@
 
         <x-alert-success />
 
-        <a href="{{ route('users.create') }}">Cadastrar Status Users</a>
+        <a href="{{ route('users.create') }}">Cadastrar Users</a>
 
         <br><br><br>
 

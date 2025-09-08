@@ -22,7 +22,7 @@
     </form>
  <br> <br>
     <a href="#">Esqueceu a Senha ?</a><br>
-    <a href="#">Criar Conta</a>
+    <a href="{{ route('register') }}">Criar Conta</a>
 
 
 @endsection

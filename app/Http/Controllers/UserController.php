@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
+//Controller de Users Administrativo
 class UserController extends Controller
 {
     public function index()
@@ -113,11 +114,12 @@ class UserController extends Controller
         // Validar o formulário
         $request->validate(
             [
-                'password' => 'required|min:6',
+                'password' => 'required|confirmed|min:6',
             ],
             [
                 'password.required' => "Campo senha é obrigatório!",
                 'password.min' => "Senha com no mínimo :min caracteres!",
+                'password.confirmed' => 'A Confirmação de Senha Não corresponde!',
             ]
         );
 

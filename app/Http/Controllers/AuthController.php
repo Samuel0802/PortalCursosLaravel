@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\AuthRegisterUserRequest;
+use App\Http\Requests\AuthLoginRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
     //Carregar a view do login
     public function index()
@@ -15,8 +17,8 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    //Validar os daods do usuário do login
-    public function loginProcess(LoginRequest $request)
+    //Validar os dados do usuário ao realizar o login
+    public function loginProcess(AuthLoginRequest $request)
     {
 
         //  dd($request);
@@ -40,8 +42,6 @@ class LoginController extends Controller
             Log::info('Login', ['action_user_id' => Auth::id()]);
 
             return redirect()->route('dashboard.index')->with('success', 'Login realizado com sucesso!');
-
-
         } catch (\Exception $e) {
 
             Log::notice('Senha do usuario não editado', ['error' => $e->getMessage()]);
@@ -59,11 +59,49 @@ class LoginController extends Controller
         //deslogar o usuário
         Auth::logout();
 
-       // Encerra completamente a sessão atual do usuário
+        // Encerra completamente a sessão atual do usuário
         $request->session()->invalidate();
         // //Gera um novo token CSRF para a sessão
         $request->session()->regenerateToken();
 
         return redirect()->route('login')->with('success', 'Logout realizado com sucesso!');
+    }
+
+    //FORMULÁRIO CADASTRAR NOVO USUARIO
+    public function create()
+    {
+        return view('auth.register');
+    }
+
+    public function store(AuthRegisterUserRequest $request)
+    {
+
+        try {
+            //Funçaõ para gerar matricula automaticamente para user
+
+            // Pega o último ID da tabela users
+            $ultimoUsuario = User::orderBy('id', 'desc')->first();
+            //Se ultimoUsuario existir pega id dele soma + 1
+            $numeroMatricula  = $ultimoUsuario ? $ultimoUsuario->id + 1 : 1;
+            //Formatar a matricula do user,str_pad preenchendo a string com tamanho desejado e com zero a esquerda
+            $matricula = str_pad($numeroMatricula, 4, '0' , STR_PAD_LEFT);
+
+            $user = User::create([
+
+                'name' => $request->input('name'),
+                'login' => $request->input('login'),
+                'email' => $request->input('email'),
+                'matricula' => $matricula,
+                'password' => bcrypt($request->input('password')), //criptografa a senha
+            ]);
+
+            //Salvar Log
+            Log::info('Usuário Cadastrado', ['user' => $user->id]);
+
+            return redirect()->route('login')->with('success', 'Cadastro realizado com Sucesso');
+        } catch (\Exception $e) {
+
+            return back()->withInput()->with('error', 'Erro ao Cadastrar o Usuario' . $e->getMessage());
+        }
     }
 }

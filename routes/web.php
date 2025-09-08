@@ -8,7 +8,7 @@ use App\Http\Controllers\ModulosController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\StatusUsersController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,13 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])->name('home');
 
 //LOGIN
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
 
 //PROCESSAR OS DADOS DO LOGIN
-Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.process');
+Route::post('/login', [AuthController::class, 'loginProcess'])->name('login.process');
 
 //PROCESSAR LOGOUT
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//FORMULÁRIO CADASTRAR NOVO USUARIO
+Route::get('/register', [AuthController::class, 'create'])->name('register');
+
+//PROCESSAR CADASTRO DE NOVO USUARIO
+Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 
 
 
