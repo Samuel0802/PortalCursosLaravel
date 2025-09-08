@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    <a href="{{ route('profile.show') }}">Perfil</a><br>
     <a href="{{  route('logout') }}">logout</a>
 
     @yield('content')

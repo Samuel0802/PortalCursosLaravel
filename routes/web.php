@@ -10,6 +10,8 @@ use App\Http\Controllers\StatusUsersController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,6 +33,9 @@ Route::get('/register', [AuthController::class, 'create'])->name('register');
 //PROCESSAR CADASTRO DE NOVO USUARIO
 Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 
+//FORMULÁRIO RECUPERAÇÃO DE SENHA
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
 
 
 //GRUPO DE ROTAS RESTRITAS
@@ -38,6 +43,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     //PAGINA INICIAL DO ADMINISTRATIVO
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+    //PAGINA DE PERFIL DO USUARIO
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+
+         //PAGINA DE EDITAR PERFIL DO USUARIO
+        Route::get('/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/{user}', [ProfileController::class, 'update'])->name('profile.update');
+
+         //PAGINA DE EDITAR SENHA DO USUARIO
+        Route::get('/{user}/edit-password', [ProfileController::class, 'editPassword'])->name('profile.edit_password');
+        Route::put('/{user}/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update_password');
+    });
 
     //ROTA DE USUARIOS
     Route::prefix('users')->group(function () {

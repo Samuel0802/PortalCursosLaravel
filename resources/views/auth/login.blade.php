@@ -21,7 +21,7 @@
 
     </form>
  <br> <br>
-    <a href="#">Esqueceu a Senha ?</a><br>
+    <a href="{{ route('password.request') }}">Esqueceu a Senha ?</a><br>
     <a href="{{ route('register') }}">Criar Conta</a>
 
 
