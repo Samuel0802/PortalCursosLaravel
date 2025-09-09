@@ -36,6 +36,11 @@ Route::post('/register', [AuthController::class, 'store'])->name('register.store
 //FORMULÁRIO RECUPERAÇÃO DE SENHA
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
+//PROCESSAR RECUPERAÇÃO DE SENHA POR EMAIL
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+//FORMULÁRIO PARA REDEFINIR  A SENHA COM O TOKEN
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showRequestForm'])->name('password.reset');
 
 
 //GRUPO DE ROTAS RESTRITAS
@@ -48,11 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
 
-         //PAGINA DE EDITAR PERFIL DO USUARIO
+        //PAGINA DE EDITAR PERFIL DO USUARIO
         Route::get('/{user}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
-         //PAGINA DE EDITAR SENHA DO USUARIO
+        //PAGINA DE EDITAR SENHA DO USUARIO
         Route::get('/{user}/edit-password', [ProfileController::class, 'editPassword'])->name('profile.edit_password');
         Route::put('/{user}/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update_password');
     });

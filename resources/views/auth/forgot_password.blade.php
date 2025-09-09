@@ -7,12 +7,12 @@
    <x-alert-success/>
    <x-alert-error/>
 
-    <form action="#" method="POST">
+    <form action="{{ route('password.email') }}" method="POST">
         @csrf
         @method('post')
 
         <label>Email</label>
-        <input type="text" name="email" id="email" placeholder="Digite seu e-mail cadastrado" value="{{ old('email') }}"/>
+        <input type="email" name="email" id="email" placeholder="Digite seu e-mail cadastrado" value="{{ old('email') }}"/>
         <br> <br>
 
         <button type="submit">Recuperar</button>
