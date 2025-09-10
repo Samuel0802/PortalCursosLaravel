@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\Return_;
 
+//Controller de Perfil do usuário
 class ProfileController extends Controller
 {
     public function show()

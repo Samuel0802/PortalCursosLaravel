@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
+
+//Controller de Login e Logout
 class AuthController extends Controller
 {
     //Carregar a view do login

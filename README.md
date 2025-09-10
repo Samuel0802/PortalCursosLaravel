@@ -98,15 +98,6 @@ http://127.0.0.1:8000
 - Para a funcionalidade enviar e-mail funcionar, necessário alterar as credenciais do servidor de envio de e-mail no arquivo .env.
 - Utilizar o servidor fake durante o desenvolvimento: [Acessar envio gratuito de e-mail](https://mailtrap.io?ref=celke)
 ```
-MAIL_MAILER=smtp
-MAIL_SCHEME=null
-MAIL_HOST=sandbox.smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=nome-do-usuario-na-mailtrap
-MAIL_PASSWORD=senha-do-usuario-na-mailtrap
-MAIL_FROM_ADDRESS="colocar-email-remetente@meu-dominio.com.br"
-MAIL_FROM_NAME="${APP_NAME}"
-```
 
 ### Se tiver usando BD SqlServe
 
