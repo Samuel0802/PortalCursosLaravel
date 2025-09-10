@@ -97,7 +97,19 @@ http://127.0.0.1:8000
 
 - Para a funcionalidade enviar e-mail funcionar, necessário alterar as credenciais do servidor de envio de e-mail no arquivo .env.
 - Utilizar o servidor fake durante o desenvolvimento: [Acessar envio gratuito de e-mail](https://mailtrap.io?ref=celke)
-```
+
+### Instalando a depencia de permissão
+
+composer require spatie/laravel-permission
+
+### Criar as migrations para o sistema de permissão
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+php artisan optimize:clear
+ 
+php artisan config:clear
+
+php artisan migrate
 
 ### Se tiver usando BD SqlServe
 

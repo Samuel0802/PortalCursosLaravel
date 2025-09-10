@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         //Seeds que deve rodar em qualquer ambiente
         if (!App::environment('production')) {
             $this->call([
+
+                PermissionSeeder::class,
+                RoleSeeder::class,
                 UserSeeder::class,
                 StatusUsersSeeder::class,
                 CursoSeeder::class,
