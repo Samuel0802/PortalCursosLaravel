@@ -1,43 +1,52 @@
 @extends('layouts.admin')
 @section('content')
+    <div>
+        <h2>Listar os cursos</h2>
+
+        <x-alert-success />
 
 
-<div>
-    <h2>Listar os cursos</h2>
+        {{-- Can: oculta o link caso user não tenha permissão para acessar a rota --}}
+        @can('create.cursos')
+            <a href="{{ route('cursos.create') }}">Cadastrar Cursos</a><br><br><br>
+        @endcan
 
-    <x-alert-success />
-
-
-      <a href="{{ route('cursos.create') }}">Cadastrar Cursos</a>
-      <br><br>  <br>
-
-       @forelse ($cursos as $curso)
+        @forelse ($cursos as $curso)
             Id: {{ $curso->id }}<br>
             Nome: {{ $curso->name }}<br>
 
-             <a href="{{ route('cursos_grupo.index', ['curso' => $curso->id]) }}">Turmas</a><br>
-             <a href="{{ route('cursos.show', ['curso' => $curso->id]) }}">Visualizar</a><br>
-             <a href="{{ route('cursos.edit', ['curso' => $curso->id]) }}">Editar</a><br>
+            @can('index.turmas')
+                <a href="{{ route('cursos_grupo.index', ['curso' => $curso->id]) }}">Turmas</a><br>
+            @endcan
 
-             <form action="{{ route('cursos.destroy', ['curso' => $curso->id]) }}" method="POST">
-             @csrf
-             @method('delete')
+            @can('show.cursos')
+                <a href="{{ route('cursos.show', ['curso' => $curso->id]) }}">Visualizar</a><br>
+            @endcan
 
-              <button type="submit" onclick="return confirm('Deseja realmente apagar esse registro?')">Apagar</button>
+            @can('edit.cursos')
+                <a href="{{ route('cursos.edit', ['curso' => $curso->id]) }}">Editar</a><br>
+            @endcan
 
-             </form>
+            @can('destroy.cursos')
+                <form action="{{ route('cursos.destroy', ['curso' => $curso->id]) }}" method="POST">
+                    @csrf
+                    @method('delete')
+
+                    <button type="submit" onclick="return confirm('Deseja realmente apagar esse registro?')">Apagar</button>
+
+                </form>
+            @endcan
+
 
             <hr>
-       @empty
+        @empty
 
-         <p>Nenhum registro encontrado</p>
+            <p>Nenhum registro encontrado</p>
+        @endforelse
 
-       @endforelse
-
-       {{ $cursos->links() }}
-
+        {{ $cursos->links() }}
 
 
-</div>
 
+    </div>
 @endsection

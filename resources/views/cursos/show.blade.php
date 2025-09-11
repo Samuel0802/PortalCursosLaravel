@@ -10,8 +10,13 @@
 
         <a href="{{ route('cursos.index') }}">Listar Cursos</a><br>
         <a href="{{ route('cursos_grupo.index', ['curso' => $curso->id]) }}">Listar Turmas</a><br>
-        <a href="{{ route('cursos.edit', ['curso' => $curso->id]) }}">Editar</a><br>
+
+        @can('edit.cursos')
+           <a href="{{ route('cursos.edit', ['curso' => $curso->id]) }}">Editar</a><br>
         <br>
+        @endcan
+
+        @can('destroy.cursos')
         <form action="{{ route('cursos.destroy', ['curso' => $curso->id]) }}" method="POST">
             @csrf
             @method('delete')
@@ -19,6 +24,8 @@
             <button type="submit" onclick="return confirm('Deseja realmente apagar esse registro?')">Apagar</button>
 
         </form><br> <br>
+        @endcan
+
 
         {{-- Imprimir o registro --}}
 

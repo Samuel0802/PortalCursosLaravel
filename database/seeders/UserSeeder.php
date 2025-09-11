@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'login' => 'samuel',
                 'email' => 'samuel@gmail.com',
                 'matricula' => '0001',
-                'password' => bcrypt('Samuel123'),
+                'password' => bcrypt('123456'),
                 'user_status_id' => 1,
 
             ]);
@@ -84,9 +84,7 @@ class UserSeeder extends Seeder
                 ]
             );
 
-            //Atribuir a permissão para o usuário =  Tutor
-            $tutor->assignRole('tutor');
-            //Permissão de aluno
+            //Atribuir a permissão para o usuário =  Aluno
             $tutor->assignRole('aluno');
 
 

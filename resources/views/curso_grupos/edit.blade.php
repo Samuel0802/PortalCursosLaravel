@@ -7,7 +7,12 @@
 
         <br> <br>
         <a href="{{ route('cursos_grupo.index', ['curso' => $grupo->curso_id]) }}">Listar</a><br>
-        <a href="{{ route('cursos_grupo.show', ['grupo' => $grupo->id]) }}">Visualizar</a><br><br>
+
+        @can('edit.turmas')
+            {{-- Can: oculta o link caso user não tenha permissão para acessar a rota --}}
+               <a href="{{ route('cursos_grupo.show', ['grupo' => $grupo->id]) }}">Visualizar</a><br><br>
+
+        @endcan
 
 
         <x-alert-error />

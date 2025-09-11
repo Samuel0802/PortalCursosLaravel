@@ -1,14 +1,15 @@
 @extends('layouts.admin')
 @section('content')
-
     <div>
         <h2>Listar Users</h2>
 
         <x-alert-success />
 
-        <a href="{{ route('users.create') }}">Cadastrar Users</a>
+        @can('create.users')
+             <a href="{{ route('users.create') }}">Cadastrar Users</a><br>
+        @endcan
 
-        <br><br><br>
+        <br>
 
         @foreach ($users as $user)
             ID: {{ $user->id }}<br>
@@ -17,17 +18,26 @@
             EMAIL: {{ $user->email }}<br>
             MATRICULA: {{ $user->matricula }}<br>
 
-            <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar</a><br>
-            <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar</a><br>
+            @can('show.users')
+                <a href="{{ route('users.show', ['user' => $user->id]) }}">Visualizar</a><br>
+            @endcan
 
-            <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST">
-                @csrf
-                @method('delete')
+            @can('edit.users')
+                <a href="{{ route('users.edit', ['user' => $user->id]) }}">Editar</a><br>
+            @endcan
 
-                <button type="submit">Excluir</button>
+            @can('destroy.users')
+                <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="POST">
+                    @csrf
+                    @method('delete')
 
-            </form>
-            <BR>
+                    <button type="submit">Excluir</button>
+
+                </form>
+                <br>
+
+            @endcan
+               <hr>
         @endforeach
 
         {{ $users->links() }}

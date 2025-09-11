@@ -1,40 +1,50 @@
 @extends('layouts.admin')
 @section('content')
+    <div>
+        <h2>Listar as Aulas</h2>
 
-<div>
-    <h2>Listar as Aulas</h2>
+        <x-alert-success />
 
-    <x-alert-success/>
+        <a href="{{ route('modulos.index', ['grupo' => $modulo->curso_grupos_id]) }}">Listar Modulos</a><br>
 
-     <a href="{{ route('modulos.index', ['grupo' => $modulo->curso_grupos_id]) }}">Listar Modulos</a><br>
-      <a href="{{ route('aulas.create', ['modulo' => $modulo->id]) }}">Cadastrar Aulas</a>
+        @can('create.aulas')
+            {{-- Can: oculta o link caso user não tenha permissão para acessar a rota --}}
+            <a href="{{ route('aulas.create', ['modulo' => $modulo->id]) }}">Cadastrar Aulas</a><br>
+        @endcan
 
- <br><br><br>
 
-      @forelse ($aulas as $aula)
-         Id: {{ $aula->id }}<br>
-         Nome: {{ $aula->name }}<br>
+        <br><br>
 
-         <a href="{{ route('aulas.show' , ['aula' => $aula->id]) }}"> Visualizar</a><br>
-          <a href="{{ route('aulas.edit' , ['aula' => $aula->id]) }}"> Editar</a><br>
+        @forelse ($aulas as $aula)
+            Id: {{ $aula->id }}<br>
+            Aula: {{ $aula->name }}<br>
+            Módulo: <a href="{{ route('modulos.show', ['modulo' => $modulo->id]) }}">{{ $modulo->name }}</a><br>
 
-           <form action="{{ route('aulas.destroy', ['aula' => $aula->id]) }}" method="POST">
-            @csrf
-            @method('delete')
+            @can('show.aulas')
+                <a href="{{ route('aulas.show', ['aula' => $aula->id]) }}"> Visualizar</a><br>
+            @endcan
 
-            <button type="submit" onclick="return confirm('Deseja realmente excluir?')"> Excluir</button>
+            @can('edit.aulas')
+                <a href="{{ route('aulas.edit', ['aula' => $aula->id]) }}"> Editar</a><br>
+            @endcan
 
-           </form>
+            @can('destroy.aulas')
+                <form action="{{ route('aulas.destroy', ['aula' => $aula->id]) }}" method="POST">
+                    @csrf
+                    @method('delete')
 
-         <hr>
+                    <button type="submit" onclick="return confirm('Deseja realmente excluir?')"> Excluir</button>
 
-      @empty
+                </form>
+            @endcan
 
-        <p style="color: red">Sem registros de Aulas</p>
+            <hr>
 
-      @endforelse
+        @empty
 
-      {{ $aulas->links() }}
-</div>
+            <p style="color: red">Sem registros de Aulas</p>
+        @endforelse
 
+        {{ $aulas->links() }}
+    </div>
 @endsection

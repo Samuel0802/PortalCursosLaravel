@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
         //******* Role Seeder: São os papeis de permissão dos usuários ********/
 
         //Se não encontrar o registro com o Super Admin, cadastra o registro no BD
-      $superAdmin = Role::firstOrCreate(
+        $superAdmin = Role::firstOrCreate(
 
             ['name' => 'Super Admin'],
             ['name' => 'Super Admin'],
@@ -37,11 +37,54 @@ class RoleSeeder extends Seeder
 
         //As paginas que admin tem permissão
         $admin->givePermissionTo([
+            'dashboard',
             'index.cursos',
             'show.cursos',
             'create.cursos',
             'edit.cursos',
             'destroy.cursos',
+
+            'index.turmas',
+            'show.turmas',
+            'create.turmas',
+            'edit.turmas',
+            'destroy.turmas',
+
+            'index.modulos',
+            'show.modulos',
+            'create.modulos',
+            'edit.modulos',
+            'destroy.modulos',
+
+            'index.aulas',
+            'show.aulas',
+            'create.aulas',
+            'edit.aulas',
+            'destroy.aulas',
+
+            'index.cursos_statuses',
+            'show.cursos_statuses',
+            'create.cursos_statuses',
+            'edit.cursos_statuses',
+            'destroy.cursos_statuses',
+
+            'show.profile',
+            'edit.profile',
+            'edit_password.profile',
+
+
+            'index.users',
+            'show.users',
+            'create.users',
+            'edit.users',
+            'edit_password.users',
+            'destroy.users',
+
+            'index.status_users',
+            'show.status_users',
+            'create.status_users',
+            'edit.status_users',
+            'destroy.status_users',
         ]);
 
 
@@ -58,11 +101,37 @@ class RoleSeeder extends Seeder
 
         //As paginas que professor tem permissão
         $professor->givePermissionTo([
+            'dashboard',
             'index.cursos',
             'show.cursos',
             'create.cursos',
             'edit.cursos',
-            'destroy.cursos',
+
+            'index.turmas',
+            'show.turmas',
+            'create.turmas',
+            'edit.turmas',
+            'destroy.turmas',
+
+            'index.modulos',
+            'show.modulos',
+            'create.modulos',
+            'edit.modulos',
+            'destroy.modulos',
+
+            'index.aulas',
+            'show.aulas',
+            'create.aulas',
+            'edit.aulas',
+            'destroy.aulas',
+
+            'show.profile',
+            'edit.profile',
+            'edit_password.profile',
+
+            'index.users',
+            'show.users',
+
         ]);
 
         //******* Permissão do Tutor *******/
@@ -77,17 +146,69 @@ class RoleSeeder extends Seeder
 
         //As paginas que tutor tem permissão
         $tutor->givePermissionTo([
+            'dashboard',
+
             'index.cursos',
             'show.cursos',
             'edit.cursos',
+
+            'index.turmas',
+            'show.turmas',
+            'create.turmas',
+            'edit.turmas',
+            'destroy.turmas',
+
+            'index.modulos',
+            'show.modulos',
+            'create.modulos',
+            'edit.modulos',
+            'destroy.modulos',
+
+            'index.aulas',
+            'show.aulas',
+            'create.aulas',
+            'edit.aulas',
+            'destroy.aulas',
+
+            'show.profile',
+            'edit.profile',
+            'edit_password.profile',
+
+            'index.users',
+            'show.users',
+
+
         ]);
 
         //******* Permissão do Aluno *******/
 
         //Se não encontrar o registro com o aluno, cadastra o registro no BD
-      $aluno = Role::firstOrCreate(
+        $aluno = Role::firstOrCreate(
             ['name' => 'Aluno'],
             ['name' => 'Aluno'],
+
         );
+
+        $aluno->givePermissionTo([
+            'dashboard',
+
+            'index.cursos',
+            'show.cursos',
+
+            'index.turmas',
+            'show.turmas',
+
+            'index.modulos',
+            'show.modulos',
+
+            'index.aulas',
+            'show.aulas',
+
+            'show.profile',
+            'edit.profile',
+            'edit_password.profile',
+
+
+        ]);
     }
 }

@@ -49,6 +49,8 @@ Relacionamento ao banco de dados
 
 mailtrap.io - teste de envios de emails
 
+Sistema de permissões com Laravel Permission
+
 
  ```
 
@@ -98,7 +100,10 @@ http://127.0.0.1:8000
 - Para a funcionalidade enviar e-mail funcionar, necessário alterar as credenciais do servidor de envio de e-mail no arquivo .env.
 - Utilizar o servidor fake durante o desenvolvimento: [Acessar envio gratuito de e-mail](https://mailtrap.io?ref=celke)
 
+
 ### Instalando a depencia de permissão
+
+Link: https://spatie.be/docs/laravel-permission/v6/introduction
 
 composer require spatie/laravel-permission
 
