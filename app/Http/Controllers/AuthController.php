@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthRegisterUserRequest;
 use App\Http\Requests\AuthLoginRequest;
 use App\Models\User;
+use App\Notifications\BoasVindasNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -99,6 +100,9 @@ class AuthController extends Controller
 
             //Salvar Log
             Log::info('Usuário Cadastrado', ['user' => $user->id]);
+
+            //Notificar o usuário por email
+            $user->notify(new BoasVindasNotification());
 
             return redirect()->route('login')->with('success', 'Cadastro realizado com Sucesso');
         } catch (\Exception $e) {

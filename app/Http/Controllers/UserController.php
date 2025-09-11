@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use App\Notifications\BoasVindasNotification;
 
 //Controller de Users Administrativo
 class UserController extends Controller
@@ -38,21 +39,34 @@ class UserController extends Controller
         return view('users.create');
     }
 
+     //Cadastrar user no banco de dados
     public function store(UserRequest $request)
     {
 
         try {
 
+             //função de gerar matricula do user automaticos
+             //Pega o ultimo id da tabela users
+             $ultimoUser = User::orderBy('id', 'desc')->first();
+             //Se ultimoUser existir pega id dele soma + 1
+             $numeroMatricula = $ultimoUser ? $ultimoUser->id + 1 : 1;
+             //Formatar a matricula do user,str_pad preenchendo a string com tamanho desejado e com zero a esquerda
+             $matricula = str_pad($numeroMatricula, 4, '0', STR_PAD_LEFT);
+
+            //Cadastrar no banco de dados na tabela users
             $user = User::create([
                 'name' => $request->input('name'),
                 'login' => $request->input('login'),
                 'email' => $request->input('email'),
-                'matricula' => $request->input('matricula'),
-                'password' => $request->input('password'),
+                'matricula' => $matricula,
+                'password' => bcrypt($request->input('password')),
             ]);
 
             //Salvar Log
             Log::info('Usuário Cadastrado', ['user_id' => $user->id]);
+
+            //Notificar o usuário por email
+            $user->notify(new BoasVindasNotification());
 
             return redirect()->route('users.show', ['user' => $user])->with('success', 'Usuario Cadastrado com sucesso');
         } catch (\Exception $e) {

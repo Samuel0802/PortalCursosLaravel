@@ -21,7 +21,7 @@ class AuthRegisterUserRequest extends FormRequest
         //Regra da validação do formulário Users
         return [
             'name' => 'required',
-            'login' => 'required|unique:users',
+            'login' => 'required|unique:users|regex:/^\S*$/u',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6'
 
@@ -35,6 +35,7 @@ class AuthRegisterUserRequest extends FormRequest
             'name.required' => 'Campo Nome é Obrigatório',
             'login.required' => 'Campo Login é Obrigatório',
             'login.unique' => 'Login já Cadastrado',
+            'login.regex' => 'Login não pode conter espaços em branco',
             'email.required' => 'Campo Email é Obrigatório',
             'email.unique' => 'Email já cadastrado',
             'email.email' => 'Necessário um Email válido',
