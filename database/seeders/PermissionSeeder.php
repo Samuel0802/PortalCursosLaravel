@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
     {
         //****** REALIZAR O NIVEL DE PERMISSÃO DOS USUÁRIOS *******/
 
-        //Criar o array de paginas
+        //Criar o array de permissões no banco de dados
         $permissions = [
             'index.cursos',
             'show.cursos',

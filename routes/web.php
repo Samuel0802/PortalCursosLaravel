@@ -98,13 +98,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     //ROTA DE CADASTRAR CURSOS
     Route::prefix('cursos')->group(function () {
-        Route::get('/', [CursosController::class, 'index'])->name('cursos.index');
-        Route::get('/create', [CursosController::class, 'create'])->name('cursos.create');
-        Route::get('/{curso}', [CursosController::class, 'show'])->name('cursos.show');
-        Route::post('/', [CursosController::class, 'store'])->name('cursos.store');
-        Route::get('/{curso}/edit', [CursosController::class, 'edit'])->name('cursos.edit');
-        Route::put('/{curso}', [CursosController::class, 'update'])->name('cursos.update');
-        Route::delete('/{curso}', [CursosController::class, 'destroy'])->name('cursos.destroy');
+        Route::get('/', [CursosController::class, 'index'])->name('cursos.index')->middleware('permission:index.cursos');
+        Route::get('/create', [CursosController::class, 'create'])->name('cursos.create')->middleware('permission:create.cursos');
+        Route::get('/{curso}', [CursosController::class, 'show'])->name('cursos.show')->middleware('permission:show.cursos');
+        Route::post('/', [CursosController::class, 'store'])->name('cursos.store')->middleware('permission:create.cursos');
+        Route::get('/{curso}/edit', [CursosController::class, 'edit'])->name('cursos.edit')->middleware('permission:edit.cursos');
+        Route::put('/{curso}', [CursosController::class, 'update'])->name('cursos.update')->middleware('permission:edit.cursos');
+        Route::delete('/{curso}', [CursosController::class, 'destroy'])->name('cursos.destroy')->middleware('permission:destroy.cursos');
     });
 
     //ROTA DE STATUS CURSOS
