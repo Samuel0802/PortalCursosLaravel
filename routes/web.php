@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //PAGINA INICIAL
-Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/', [MainController::class, 'index'])->name('home')->middleware('permission:dashboard');;
 
 //LOGIN
 Route::get('/login', [AuthController::class, 'index'])->name('login');

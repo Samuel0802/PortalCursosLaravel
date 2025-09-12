@@ -9,7 +9,7 @@ use App\Notifications\BoasVindasNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 
 //Controller de Login e Logout
 class AuthController extends Controller
@@ -87,7 +87,7 @@ class AuthController extends Controller
             //Se ultimoUsuario existir pega id dele soma + 1
             $numeroMatricula  = $ultimoUsuario ? $ultimoUsuario->id + 1 : 1;
             //Formatar a matricula do user,str_pad preenchendo a string com tamanho desejado e com zero a esquerda
-            $matricula = str_pad($numeroMatricula, 4, '0' , STR_PAD_LEFT);
+            $matricula = str_pad($numeroMatricula, 4, '0', STR_PAD_LEFT);
 
             $user = User::create([
 
@@ -97,6 +97,14 @@ class AuthController extends Controller
                 'matricula' => $matricula,
                 'password' => bcrypt($request->input('password')), //criptografa a senha
             ]);
+
+            //// Verificar se a role "Aluno" existe antes de atribuir
+            if (Role::where('name', 'Aluno')->exists()) {
+                //adicionar uma permissão para novo user como aluno
+                //// Se existir, atribui ao usuário
+                $user->assignRole('Aluno');
+            }
+
 
             //Salvar Log
             Log::info('Usuário Cadastrado', ['user' => $user->id]);

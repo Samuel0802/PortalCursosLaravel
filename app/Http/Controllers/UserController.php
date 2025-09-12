@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use App\Notifications\BoasVindasNotification;
+use Spatie\Permission\Models\Role;
 
 //Controller de Users Administrativo
 class UserController extends Controller
@@ -36,7 +37,10 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        //Recuperar as permissão da coluna name e buscar todos os registros DB
+        $permissoes = Role::pluck('name')->all();
+
+        return view('users.create', ['permissoes' => $permissoes]);
     }
 
      //Cadastrar user no banco de dados
@@ -61,6 +65,19 @@ class UserController extends Controller
                 'matricula' => $matricula,
                 'password' => bcrypt($request->input('password')),
             ]);
+
+            //Verificar se veio alguma permissão selecionada ao cadastrar o usuario
+             if($request->filled('permissoes')){
+
+                //verificar se todas as permissão existem (opcional, mas recomendado para user)
+                //pluck: pega apenas coluna nome
+               $validPermissoes = Role::whereIn('name', $request->permissoes)->pluck('name')->toArray();
+
+               //atribui os papeis validos ao usuario
+               //User deve ser sicronizar
+               $user->syncRoles($validPermissoes); //syncRoles() varias permissão ou assignRoles() se for apenas uma permissão
+
+             }
 
             //Salvar Log
             Log::info('Usuário Cadastrado', ['user_id' => $user->id]);

@@ -21,10 +21,10 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required',
             // login obrigatório e único (ignora o ID do usuário atual se for edição)
-            'login' => 'required|unique:users,login,' . ($user ? $user->id : null),
+            'login' => 'required|regex:/^\S*$/u|unique:users,login,' . ($user ? $user->id : null),
             // email obrigatório e único (mesmo esquema acima)
             'email' => 'required|email|unique:users,email,' . ($user ? $user->id : null),
-            'matricula' => 'required_if:matricula,!=null|unique:users,matricula|regex:/^\S*$/u',
+            'matricula' => 'required_if:matricula,!=null|unique:users,matricula',
             // senha: só obrigatória se vier no request, e precisa de pelo menos 6 caracteres
             'password' => 'required_if:password,!=null|min:6|confirmed'
 

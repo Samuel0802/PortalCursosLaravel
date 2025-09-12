@@ -24,6 +24,19 @@
           EMAIL: {{ $user->email }}<br>
           MATRICULA: {{ $user->matricula }}<br>
           STATUS: {{ $user->userStatus?->name ?? 'Sem status' }}<br>
+          Permissão:
+          {{-- getRoleNames() → retorna todos os papéis atribuídos a um usuário, em forma de Collection. --}}
+          @forelse ($user->getRoleNames() as $item)
+           {{-- Se for diferente do ultimo registro => Existe mais registro --}}
+                @if (!$loop->last)
+                     {{  $item . ','  }}
+                     {{-- Caso for ultimo registro => Não existe mais registro --}}
+                @else()
+                      {{ $item . '.' }}
+                @endif
+          @empty
+            -
+          @endforelse<br>
           Cadastrado: {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }}<br>
           Atualizado: {{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y H:i:s') }}<br>
 
