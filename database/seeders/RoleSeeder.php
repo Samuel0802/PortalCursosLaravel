@@ -79,6 +79,8 @@ class RoleSeeder extends Seeder
             'edit.users',
             'edit_password.users',
             'destroy.users',
+            //Permissao para criar e editar a permissão dos usuários
+            'edit.permissao.users',
 
             'index.status_users',
             'show.status_users',
@@ -176,6 +178,8 @@ class RoleSeeder extends Seeder
 
             'index.users',
             'show.users',
+            'create.users',
+
 
 
         ]);

@@ -43,19 +43,19 @@ class UserController extends Controller
         return view('users.create', ['permissoes' => $permissoes]);
     }
 
-     //Cadastrar user no banco de dados
+    //Cadastrar user no banco de dados
     public function store(UserRequest $request)
     {
 
         try {
 
-             //função de gerar matricula do user automaticos
-             //Pega o ultimo id da tabela users
-             $ultimoUser = User::orderBy('id', 'desc')->first();
-             //Se ultimoUser existir pega id dele soma + 1
-             $numeroMatricula = $ultimoUser ? $ultimoUser->id + 1 : 1;
-             //Formatar a matricula do user,str_pad preenchendo a string com tamanho desejado e com zero a esquerda
-             $matricula = str_pad($numeroMatricula, 4, '0', STR_PAD_LEFT);
+            //função de gerar matricula do user automaticos
+            //Pega o ultimo id da tabela users
+            $ultimoUser = User::orderBy('id', 'desc')->first();
+            //Se ultimoUser existir pega id dele soma + 1
+            $numeroMatricula = $ultimoUser ? $ultimoUser->id + 1 : 1;
+            //Formatar a matricula do user,str_pad preenchendo a string com tamanho desejado e com zero a esquerda
+            $matricula = str_pad($numeroMatricula, 4, '0', STR_PAD_LEFT);
 
             //Cadastrar no banco de dados na tabela users
             $user = User::create([
@@ -66,18 +66,18 @@ class UserController extends Controller
                 'password' => bcrypt($request->input('password')),
             ]);
 
-            //Verificar se veio alguma permissão selecionada ao cadastrar o usuario
-             if($request->filled('permissoes')){
+            //Verificar se veio alguma permissoes selecionada ao cadastrar o usuario
+            if ($request->filled('permissoes')) {
 
                 //verificar se todas as permissão existem (opcional, mas recomendado para user)
                 //pluck: pega apenas coluna nome
-               $validPermissoes = Role::whereIn('name', $request->permissoes)->pluck('name')->toArray();
+                $validPermissoes = Role::whereIn('name', $request->permissoes)->pluck('name')->toArray();
 
-               //atribui os papeis validos ao usuario
-               //User deve ser sicronizar
-               $user->syncRoles($validPermissoes); //syncRoles() varias permissão ou assignRoles() se for apenas uma permissão
+                //atribui os papeis validos ao usuario
+                //User deve ser sicronizar
+                $user->syncRoles($validPermissoes); //syncRoles() varias permissão ou assignRoles() se for apenas uma permissão
 
-             }
+            }
 
             //Salvar Log
             Log::info('Usuário Cadastrado', ['user_id' => $user->id]);
@@ -95,15 +95,21 @@ class UserController extends Controller
         }
     }
 
+
     //Carregar o formulário editar Users
     public function edit(User $user)
     {
+        //recuperar as permissões da coluna name e buscar todos os registros DB
+        $roles = Role::pluck('name')->all();
 
-        return view('users.edit', ['user' => $user]);
+        //Recuperar as permissões do usuario
+        $userRoles = $user->roles->pluck('name')->toArray();
+
+        return view('users.edit', ['user' => $user,'roles' => $roles,'userRoles' => $userRoles]);
     }
 
 
-    //função de editar o Users
+    //função de update do Users
     public function update(UserRequest $request, User $user)
     {
 
@@ -115,6 +121,20 @@ class UserController extends Controller
                 'email' => $request->input('email'),
 
             ]);
+
+            //Se Houver papeis enviado no request,
+            if($request->filled('roles')){
+
+                 //Verificar se todos as permissão existe(opcional, mas recomendado para user)
+               $validRoles = Role::whereIn('name', $request->roles)->pluck('name')->toArray();
+
+              //  sincroniza-os com o usuario
+                $user->syncRoles($validRoles);////syncRoles() varias permissão ou assignRoles() se for apenas uma permissão
+
+            }else{
+            //se nenhuma permissão for enviado, remove todas as permissão do usuario
+                $user->syncRoles([]);
+            }
 
             //Salvar Log
             Log::info('Usuário Editado', ['user_id' => $user->id]);

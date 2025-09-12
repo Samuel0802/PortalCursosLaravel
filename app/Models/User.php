@@ -10,7 +10,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles; //Laravel Permission
 
 use App\Models\StatusUsers;
-
+use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable  implements Auditable
 {
@@ -66,6 +66,7 @@ class User extends Authenticatable  implements Auditable
         //muitos usuario -> 1 status
         return  $this->belongsTo(StatusUsers::class);
     }
+
 
 
 

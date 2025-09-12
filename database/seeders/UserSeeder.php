@@ -84,8 +84,8 @@ class UserSeeder extends Seeder
                 ]
             );
 
-            //Atribuir a permissão para o usuário =  Aluno
-            $tutor->assignRole('aluno');
+            //Atribuir a permissão para o usuário =  tutor
+            $tutor->assignRole('tutor');
 
 
         }

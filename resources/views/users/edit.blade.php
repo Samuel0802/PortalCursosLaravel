@@ -27,6 +27,25 @@
          <label>Email:</label>
        <input type="text" name="email" id="email" placeholder="Email" value="{{ old('email', $user->email) }}"  required/><br><br>
 
+         @can('edit.permissao.users')
+        <label>Permissão:</label>
+        @forelse ($roles  as $role)
+          {{-- Essa lógica evita que usuários comuns vejam a permissão de Super Admin. --}}
+
+            @if($role != 'Super Admin' || Auth::user()->hasRole('Super Admin'))
+              <input type="checkbox" name="roles[]" id="role_{{ Str::slug($role) }}"  value="{{ $role }}"
+               {{ in_array($role, old('roles', $userRoles)) ? 'checked' : '' }}
+              />
+              <label for="role_{{ Str::slug($role) }}">{{ $role }}</label>
+
+            @endif
+
+        @empty
+             <p>Sem Permissão Disponivel</p>
+        @endforelse
+         <br><br>
+           @endcan
+
          <label>Matricula:</label>
        <input type="text" name="matricula" id="matricula" placeholder="Matricula" value={{ old('matricula', $user->matricula) }} @disabled(true)/><br><br>
 

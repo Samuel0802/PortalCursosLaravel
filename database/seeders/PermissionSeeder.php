@@ -60,6 +60,8 @@ class PermissionSeeder extends Seeder
            'edit.users',
            'edit_password.users',
            'destroy.users',
+           //editar a permissão dos usuários
+           'edit.permissao.users',
 
            'index.status_users',
            'show.status_users',
